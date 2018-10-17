@@ -1,0 +1,14 @@
+C:\Users\Louise\Documents\GitHub\AccountingApp\src\API\AccountingApp.API\bin\Debug\netcoreapp2.1\AccountingApp.API.deps.json
+C:\Users\Louise\Documents\GitHub\AccountingApp\src\API\AccountingApp.API\bin\Debug\netcoreapp2.1\AccountingApp.API.runtimeconfig.json
+C:\Users\Louise\Documents\GitHub\AccountingApp\src\API\AccountingApp.API\bin\Debug\netcoreapp2.1\AccountingApp.API.runtimeconfig.dev.json
+C:\Users\Louise\Documents\GitHub\AccountingApp\src\API\AccountingApp.API\bin\Debug\netcoreapp2.1\AccountingApp.API.dll
+C:\Users\Louise\Documents\GitHub\AccountingApp\src\API\AccountingApp.API\bin\Debug\netcoreapp2.1\AccountingApp.API.pdb
+C:\Users\Louise\Documents\GitHub\AccountingApp\src\API\AccountingApp.API\obj\Debug\netcoreapp2.1\AccountingApp.API.csprojAssemblyReference.cache
+C:\Users\Louise\Documents\GitHub\AccountingApp\src\API\AccountingApp.API\obj\Debug\netcoreapp2.1\AccountingApp.API.csproj.CoreCompileInputs.cache
+C:\Users\Louise\Documents\GitHub\AccountingApp\src\API\AccountingApp.API\obj\Debug\netcoreapp2.1\AccountingApp.API.RazorAssemblyInfo.cache
+C:\Users\Louise\Documents\GitHub\AccountingApp\src\API\AccountingApp.API\obj\Debug\netcoreapp2.1\AccountingApp.API.RazorAssemblyInfo.cs
+C:\Users\Louise\Documents\GitHub\AccountingApp\src\API\AccountingApp.API\obj\Debug\netcoreapp2.1\AccountingApp.API.AssemblyInfoInputs.cache
+C:\Users\Louise\Documents\GitHub\AccountingApp\src\API\AccountingApp.API\obj\Debug\netcoreapp2.1\AccountingApp.API.AssemblyInfo.cs
+C:\Users\Louise\Documents\GitHub\AccountingApp\src\API\AccountingApp.API\obj\Debug\netcoreapp2.1\AccountingApp.API.RazorTargetAssemblyInfo.cache
+C:\Users\Louise\Documents\GitHub\AccountingApp\src\API\AccountingApp.API\obj\Debug\netcoreapp2.1\AccountingApp.API.dll
+C:\Users\Louise\Documents\GitHub\AccountingApp\src\API\AccountingApp.API\obj\Debug\netcoreapp2.1\AccountingApp.API.pdb
