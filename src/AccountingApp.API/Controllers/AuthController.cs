@@ -11,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 namespace AccountingApp.API.Controllers
-{
+{    
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
@@ -43,6 +43,9 @@ namespace AccountingApp.API.Controllers
             return StatusCode(201);
         }
 
+
+        //To see what is inside the token go to https://jwt.io/
+        //Dont store sensitive information inside the token.
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
@@ -55,8 +58,8 @@ namespace AccountingApp.API.Controllers
                 new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
                 new Claim(ClaimTypes.Name, userFromRepo.Username)
             };
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings: Token").Value));
+            
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
