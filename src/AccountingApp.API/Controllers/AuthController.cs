@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using AccountingApp.API.Data;
 using AccountingApp.API.Dtos;
@@ -19,7 +20,7 @@ namespace AccountingApp.API.Controllers
 
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
-        {
+        {           
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
 
             if (await _repo.UserExist(userForRegisterDto.Username))
