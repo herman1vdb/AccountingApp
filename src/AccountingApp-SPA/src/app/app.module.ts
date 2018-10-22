@@ -5,24 +5,26 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
-import { ValueComponent } from './value/value.component';
 import { NavComponent } from './nav/nav.component';
 import { AuthService } from './_services/auth.service';
+import { HomeComponent } from './home/home.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
    declarations: [
       AppComponent,
       UserComponent,
-      ValueComponent,
-      NavComponent
+      NavComponent,
+      HomeComponent,
+      RegisterComponent
    ],
    imports: [
       BrowserModule,
-       HttpClientModule,
+      HttpClientModule,
       FormsModule
    ],
-    providers: [
-       AuthService
+   providers: [
+      AuthService
    ],
    bootstrap: [
       AppComponent
