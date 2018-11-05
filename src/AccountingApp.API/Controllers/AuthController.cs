@@ -32,14 +32,9 @@ namespace AccountingApp.API.Controllers
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
 
             if (await _repo.UserExist(userForRegisterDto.Username))
-                return BadRequest("Username already exists");
+                return BadRequest("Username already exists");            
 
-            var userToCreate = new User
-            {
-                Username = userForRegisterDto.Username
-            };
-
-            var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
+            var createdUser = await _repo.Register(userForRegisterDto);
 
             return StatusCode(201);
         }
