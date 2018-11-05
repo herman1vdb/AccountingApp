@@ -66,10 +66,7 @@ namespace AccountingApp.API.Data
 
         public async Task<bool> UserExist(string username)
         {
-            if(await _context.Users.AnyAsync(x=>x.Username == username))
-                return true;
-
-            return false;
+            return await _context.Users.AnyAsync(x => x.Username == username);
         }
     }
 }
