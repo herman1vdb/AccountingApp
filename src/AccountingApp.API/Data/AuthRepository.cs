@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using AccountingApp.API.Dtos;
 using AccountingApp.API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -41,14 +42,19 @@ namespace AccountingApp.API.Data
             }
         }
 
-        public async Task<User> Register(User user, string password)
+        public async Task<User> Register(UserForRegisterDto userForRegisterDto)
         {
+            
             byte[] passwordHash, passwordSalt;
-            CreatePasswordHash(password, out passwordHash, out passwordSalt);
-
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
-
+            CreatePasswordHash(userForRegisterDto.Password, out passwordHash, out passwordSalt);
+            
+            User user = new User
+            {
+                Username = userForRegisterDto.Username,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt
+            };
+            
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
 
