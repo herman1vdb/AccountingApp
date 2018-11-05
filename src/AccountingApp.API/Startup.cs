@@ -59,10 +59,10 @@ namespace AccountingApp.API
             }
 
             // app.UseHttpsRedirection();
-            if(env.IsDevelopment())
-            {
+            // if(env.IsDevelopment())
+            // {
                 app.UseCors(x=>x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-            }
+            //}
             app.UseAuthentication();
             app.UseMvc();
         }
