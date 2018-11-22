@@ -81,8 +81,10 @@ namespace AccountingApp.API
             // app.UseHttpsRedirection();
             // if(env.IsDevelopment())
             // {
-                
+
             //seeder.SeedUsers();
+            //seeder.SeedTypes();
+            //seeder.SeedAccounts();
             app.UseCors(x=>x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             //}
             app.UseAuthentication();

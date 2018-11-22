@@ -1,0 +1,38 @@
+[
+    {
+        "Description": "Salary",
+        "TypeId": 1
+    },
+    {
+        "Description": "Rent",
+        "TypeId": 2
+    },
+    {
+        "Description": "Homeloan",
+        "TypeId": 4
+    },
+    {
+        "Description": "Vehicle",
+        "TypeId": 3
+    },
+    {
+        "Description": "Groceries",
+        "TypeId": 2
+    },
+    {
+        "Description": "Medical Aid",
+        "TypeId": 2
+    },
+    {
+        "Description": "Insurance",
+        "TypeId": 2
+    },
+    {
+        "Description": "Levies",
+        "TypeId": 2
+    },
+    {
+        "Description": "Rates and Taxes",
+        "TypeId": 2
+    }    
+  ]

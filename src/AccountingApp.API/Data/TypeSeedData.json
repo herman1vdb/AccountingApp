@@ -1,0 +1,14 @@
+[
+    {
+        "Description": "Income"      
+    },
+    {
+        "Description": "Expense"      
+    },
+    {
+        "Description": "Asset"      
+    },
+    {
+        "Description": "Liability"      
+    }
+  ]
