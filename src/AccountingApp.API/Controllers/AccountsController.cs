@@ -1,6 +1,9 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AccountingApp.API.Data;
+using AccountingApp.API.Dtos;
 using AccountingApp.API.Models;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,8 +15,10 @@ namespace AccountingApp.API.Controllers
     public class AccountsController : ControllerBase
     {
         private readonly IAccountingRepository _repo;
-        public AccountsController(IAccountingRepository repo)
+        private readonly IMapper _mapper;
+        public AccountsController(IAccountingRepository repo, IMapper mapper)
         {
+            _mapper = mapper;
             _repo = repo;
 
         }
@@ -22,14 +27,17 @@ namespace AccountingApp.API.Controllers
         public async Task<IActionResult> GetAccounts()
         {
             var accounts = await _repo.GetObjects<Account>();
-            return Ok(accounts);
+            var accountToReturn = _mapper.Map<IEnumerable<AccountForListDto>>(accounts);
+            return Ok(accountToReturn);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAccount(int id)
         {
             var account = await _repo.GetObject<Account>(id);
-            return Ok(account);
+
+            var accountToReturn = _mapper.Map<AccountForDetailedDto>(account);
+            return Ok(accountToReturn);
         }
     }
 }

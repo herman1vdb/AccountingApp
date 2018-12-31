@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AccountingApp.API.Data;
 using AccountingApp.API.Helpers;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -41,6 +42,7 @@ namespace AccountingApp.API
                 opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
             services.AddCors();
+            services.AddAutoMapper();
             services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IAccountingRepository, AccountingRepository>();
