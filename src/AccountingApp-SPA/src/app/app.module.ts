@@ -17,6 +17,7 @@ import { AccountsComponent } from './accounts/accounts.component';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import { AuthGuard } from './_guards/auth.guard';
+import { AccountService } from './_services/account.service';
 
 @NgModule({
    declarations: [
@@ -38,7 +39,8 @@ import { AuthGuard } from './_guards/auth.guard';
       AuthService,
       ErrorInterceptorProvider,
       AlertifyService,
-      AuthGuard
+      AuthGuard,
+      AccountService
    ],
    bootstrap: [
       AppComponent
