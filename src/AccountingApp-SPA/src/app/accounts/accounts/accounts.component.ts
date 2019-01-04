@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Account } from '../_models/account';
-import { AccountService } from '../_services/account.service';
-import { AlertifyService } from '../_services/alertify.service';
+import { Account } from '../../_models/account';
+import { AccountService } from '../../_services/account.service';
+import { AlertifyService } from '../../_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

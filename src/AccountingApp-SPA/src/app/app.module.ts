@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppComponent } from './app.component';
-import { UserComponent } from './user/user.component';
+import { UserComponent } from './users/user/user.component';
 import { NavComponent } from './nav/nav.component';
 import { AuthService } from './_services/auth.service';
 import { HomeComponent } from './home/home.component';
@@ -14,15 +14,15 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { AlertifyService } from './_services/alertify.service';
 
 import { BsDropdownModule } from 'ngx-bootstrap';
-import { AccountsComponent } from './accounts/accounts.component';
+import { AccountsComponent } from './accounts/accounts/accounts.component';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import { AuthGuard } from './_guards/auth.guard';
 import { AccountService } from './_services/account.service';
-import { AccountDetailComponent } from './account-detail/account-detail.component';
+import { AccountDetailComponent } from './accounts/account-detail/account-detail.component';
 import { AccountDetailResolver } from './_resolvers/account-detail.resolver';
 import { AccountListResolver } from './_resolvers/account-list.resolver';
-import { UserEditComponent } from './user-edit/user-edit.component';
+import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
 
 export function tokenGetter() {
