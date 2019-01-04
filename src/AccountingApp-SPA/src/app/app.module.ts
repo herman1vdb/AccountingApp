@@ -19,6 +19,7 @@ import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import { AuthGuard } from './_guards/auth.guard';
 import { AccountService } from './_services/account.service';
+import { AccountDetailComponent } from './account-detail/account-detail.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -31,7 +32,8 @@ export function tokenGetter() {
       NavComponent,
       HomeComponent,
       RegisterComponent,
-      AccountsComponent
+      AccountsComponent,
+      AccountDetailComponent
    ],
    imports: [
       BrowserModule,
@@ -45,7 +47,7 @@ export function tokenGetter() {
             whitelistedDomains: ['localhost:5000'],
             blacklistedRoutes: ['localhost:5000/api/auth']
          }
-      })
+})
    ],
    providers: [
       AuthService,
