@@ -4,6 +4,8 @@ import { AccountsComponent } from './accounts/accounts.component';
 import { UserComponent } from './user/user.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { AccountDetailComponent } from './account-detail/account-detail.component';
+import { AccountDetailResolver } from './_resolvers/account-detail.resolver';
+import { AccountListResolver } from './_resolvers/account-list.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -12,8 +14,8 @@ export const appRoutes: Routes = [
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         children: [
-            { path: 'accounts', component: AccountsComponent },
-            { path: 'accounts/:id', component: AccountDetailComponent },
+            { path: 'accounts', component: AccountsComponent, resolve: {accounts: AccountListResolver}  },
+            { path: 'accounts/:id', component: AccountDetailComponent, resolve: {account: AccountDetailResolver} },
             { path: 'user', component: UserComponent },
         ]
     },

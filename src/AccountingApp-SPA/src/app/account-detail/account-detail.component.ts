@@ -16,15 +16,8 @@ export class AccountDetailComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadAccount();
-  }
-
-  loadAccount() {
-    this.accountService.getAccount(+this.route.snapshot.params['id']).subscribe((account: Account) => {
-      this.account = account;
-    }, error => {
-      this.alertify.error(error);
+    this.route.data.subscribe(data => {
+      this.account = data['account'];
     });
   }
-
 }

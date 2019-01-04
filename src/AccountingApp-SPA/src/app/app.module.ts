@@ -20,6 +20,8 @@ import { appRoutes } from './routes';
 import { AuthGuard } from './_guards/auth.guard';
 import { AccountService } from './_services/account.service';
 import { AccountDetailComponent } from './account-detail/account-detail.component';
+import { AccountDetailResolver } from './_resolvers/account-detail.resolver';
+import { AccountListResolver } from './_resolvers/account-list.resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -54,7 +56,9 @@ export function tokenGetter() {
       ErrorInterceptorProvider,
       AlertifyService,
       AuthGuard,
-      AccountService
+      AccountService,
+      AccountDetailResolver,
+      AccountListResolver
    ],
    bootstrap: [
       AppComponent
