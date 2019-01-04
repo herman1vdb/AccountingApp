@@ -24,6 +24,8 @@ import { AccountDetailResolver } from './_resolvers/account-detail.resolver';
 import { AccountListResolver } from './_resolvers/account-list.resolver';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
+import { AccountEditComponent } from './accounts/account-edit/account-edit/account-edit.component';
+import { AccountEditResolver } from './_resolvers/account-edit.resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -38,7 +40,8 @@ export function tokenGetter() {
       RegisterComponent,
       AccountsComponent,
       AccountDetailComponent,
-      UserEditComponent
+      UserEditComponent,
+      AccountEditComponent
    ],
    imports: [
       BrowserModule,
@@ -62,7 +65,8 @@ export function tokenGetter() {
       AccountService,
       AccountDetailResolver,
       AccountListResolver,
-      UserEditResolver
+      UserEditResolver,
+      AccountEditResolver
    ],
    bootstrap: [
       AppComponent

@@ -8,6 +8,8 @@ import { AccountDetailResolver } from './_resolvers/account-detail.resolver';
 import { AccountListResolver } from './_resolvers/account-list.resolver';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
+import { AccountEditResolver } from './_resolvers/account-edit.resolver';
+import { AccountEditComponent } from './accounts/account-edit/account-edit/account-edit.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -17,7 +19,8 @@ export const appRoutes: Routes = [
         canActivate: [AuthGuard],
         children: [
             { path: 'accounts', component: AccountsComponent, resolve: {accounts: AccountListResolver}  },
-            { path: 'accounts/:id', component: AccountDetailComponent, resolve: {account: AccountDetailResolver} },
+            { path: 'accounts/:id', component: AccountDetailComponent, resolve: { account: AccountDetailResolver } },
+            { path: 'accounts/edit/:id', component: AccountEditComponent, resolve: {account: AccountEditResolver} },
             { path: 'user', component: UserComponent },
             { path: 'user/edit', component: UserEditComponent, resolve: {user: UserEditResolver} },
         ]

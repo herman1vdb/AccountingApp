@@ -1,11 +1,14 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-2 col-md-3 col-sm-6">
-      <p *ngFor="let account of accounts">{{account.description}} 
+      <div *ngFor="let account of accounts">{{account.description}} 
         <button class="btn btn-primary" [routerLink]="['/accounts/', account.id]" routerLinkActive="router-link-active" >
           Details
-        </button></p>
-      
+        </button>
+        <button class="btn btn-primary" [routerLink]="['/accounts/edit/', account.id]" routerLinkActive="router-link-active" >
+          Edit
+        </button>
+      </div>      
     </div>
   </div>
 </div>
