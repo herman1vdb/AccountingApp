@@ -15,10 +15,10 @@ export class AlertifyService {
     });
   }
   success(message: string) {
-    alertify.error(message);
+    alertify.success(message);
   }
   error(message: string) {
-    alertify.success(message);
+    alertify.error(message);
   }
   warning(message: string) {
     alertify.warning(message);
