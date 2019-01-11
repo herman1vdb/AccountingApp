@@ -26,6 +26,7 @@ import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { AccountEditComponent } from './accounts/account-edit/account-edit/account-edit.component';
 import { AccountEditResolver } from './_resolvers/account-edit.resolver';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -63,6 +64,7 @@ export function tokenGetter() {
       ErrorInterceptorProvider,
       AlertifyService,
       AuthGuard,
+      PreventUnsavedChanges,
       AccountService,
       AccountDetailResolver,
       AccountListResolver,
