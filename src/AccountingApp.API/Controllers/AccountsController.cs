@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AccountingApp.API.Data;
 using AccountingApp.API.Dtos;
@@ -38,6 +40,19 @@ namespace AccountingApp.API.Controllers
 
             var accountToReturn = _mapper.Map<AccountForDetailedDto>(account);
             return Ok(accountToReturn);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateAccount(int id, AccountForUpdateDto accountForUpdateDto)
+        {
+            var accountFromRepo = await _repo.GetAccount(id);
+
+            _mapper.Map(accountForUpdateDto, accountFromRepo);
+
+            if (await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Updating account {id} failed on save");
         }
     }
 }

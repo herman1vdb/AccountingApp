@@ -18,4 +18,7 @@ export class AccountService {
   getAccount(id): Observable<Account> {
     return this.http.get<Account>(this.baseUrl + 'accounts/' + id);
   }
+  updateAccount(id: number, account: Account) {
+    return this.http.put(this.baseUrl + 'accounts/' + id, account);
+  }
 }

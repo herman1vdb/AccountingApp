@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { AccountService } from 'src/app/_services/account.service';
+import { AlertifyService } from 'src/app/_services/alertify.service';
+import { Account } from '../../../_models/account';
 
 @Component({
   selector: 'app-account-edit',
@@ -7,13 +11,22 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./account-edit.component.css']
 })
 export class AccountEditComponent implements OnInit {
+  @ViewChild('editForm') editForm: NgForm;
   account: Account;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private accountService: AccountService, private alertify: AlertifyService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.account = data['account'];
+    });
+  }
+  updateAccount() {
+    this.accountService.updateAccount(this.account.id, this.account).subscribe(next => {
+      this.alertify.success('Account updated successfully');
+      this.editForm.reset(this.account);
+    }, error => {
+      this.alertify.error(error);
     });
   }
 

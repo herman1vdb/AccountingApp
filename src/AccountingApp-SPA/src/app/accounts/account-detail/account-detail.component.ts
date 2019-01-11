@@ -17,6 +17,7 @@ export class AccountDetailComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(data => {
+      console.log(data);
       this.account = data['account'];
     });
   }
