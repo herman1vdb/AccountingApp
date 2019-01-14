@@ -45,7 +45,7 @@ namespace AccountingApp.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAccount(int id, AccountForUpdateDto accountForUpdateDto)
         {
-            var accountFromRepo = await _repo.GetAccount(id);
+            var accountFromRepo = await _repo.GetObject<Account>(id);
 
             _mapper.Map(accountForUpdateDto, accountFromRepo);
 

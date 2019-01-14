@@ -1,38 +1,45 @@
 [
     {
         "Description": "Salary",
-        "TypeId": 1
+        "TypeId": 1,
+        "Budget": 4500
     },
     {
         "Description": "Rent",
-        "TypeId": 2
+        "TypeId": 2,
+        "Budget": 1000
     },
     {
         "Description": "Homeloan",
-        "TypeId": 4
+        "TypeId": 4        
     },
     {
         "Description": "Vehicle",
-        "TypeId": 3
+        "TypeId": 3        
     },
     {
         "Description": "Groceries",
-        "TypeId": 2
+        "TypeId": 2,
+        "Budget": 1000
     },
     {
         "Description": "Medical Aid",
-        "TypeId": 2
+        "TypeId": 2,
+        "Budget": 500
     },
     {
         "Description": "Insurance",
-        "TypeId": 2
+        "TypeId": 2,
+        "Budget": 300
     },
     {
         "Description": "Levies",
-        "TypeId": 2
+        "TypeId": 2,
+        "Budget": 200
     },
     {
         "Description": "Rates and Taxes",
-        "TypeId": 2
+        "TypeId": 2,
+        "Budget": 0
     }    
   ]

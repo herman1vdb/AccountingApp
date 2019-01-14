@@ -51,7 +51,7 @@ namespace AccountingApp.API
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:Token").Value)),                    
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
@@ -68,20 +68,20 @@ namespace AccountingApp.API
             else
             {
                 //setting up global exception handler. Replaces try catch code.
-                 app.UseExceptionHandler(builder =>
-                {
-                    builder.Run(async context =>
-                    {
-                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                app.UseExceptionHandler(builder =>
+               {
+                   builder.Run(async context =>
+                   {
+                       context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-                        var error = context.Features.Get<IExceptionHandlerFeature>();
-                        if (error != null)
-                        {
-                            context.Response.AddApplicationError(error.Error.Message);
-                            await context.Response.WriteAsync(error.Error.Message);
-                        }
-                    });
-                });
+                       var error = context.Features.Get<IExceptionHandlerFeature>();
+                       if (error != null)
+                       {
+                           context.Response.AddApplicationError(error.Error.Message);
+                           await context.Response.WriteAsync(error.Error.Message);
+                       }
+                   });
+               });
                 // app.UseHsts();
             }
 
@@ -92,10 +92,12 @@ namespace AccountingApp.API
             //seeder.SeedUsers();
             //seeder.SeedTypes();
             //seeder.SeedAccounts();
-            app.UseCors(x=>x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            //seeder.SeedTransactions();
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             //}
             app.UseAuthentication();
             app.UseMvc();
         }
     }
 }
+

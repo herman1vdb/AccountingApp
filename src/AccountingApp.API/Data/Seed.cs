@@ -54,5 +54,14 @@ namespace AccountingApp.API.Data
             _context.SaveChanges();
         }
 
+         public void SeedTransactions()
+        {
+            var transactionData = System.IO.File.ReadAllText("Data/TransactionSeedData.json");
+            var transactions = JsonConvert.DeserializeObject<List<Transaction>>(transactionData);
+            transactions.ForEach(trans=>_context.Transactions.Add(trans));
+            _context.SaveChanges();
+        }
+
+
     }
 }

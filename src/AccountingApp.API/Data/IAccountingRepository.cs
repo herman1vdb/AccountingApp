@@ -10,7 +10,6 @@ namespace AccountingApp.API.Data
         void Delete<T>(T entity) where T : class;
         Task<bool> SaveAll();
         Task<IEnumerable<T>> GetObjects<T>() where T:class;
-        Task<T> GetObject<T>(int id) where T: class;
-        Task<Account> GetAccount(int id);
+        Task<T> GetObject<T>(int id) where T: class;        
     }
 }

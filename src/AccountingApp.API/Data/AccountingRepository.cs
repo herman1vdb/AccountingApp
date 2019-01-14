@@ -23,13 +23,6 @@ namespace AccountingApp.API.Data
             _context.Remove(entity);
         }
 
-        public async Task<Account> GetAccount(int id)
-        {            
-            return await _context
-                .Accounts
-                .FirstOrDefaultAsync(a => a.Id == id);
-        }
-
         public async Task<T> GetObject<T>(int id) where T : class
         {
             return await _context.Set<T>().FindAsync(id);
