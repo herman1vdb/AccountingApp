@@ -27,6 +27,11 @@ import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { AccountEditComponent } from './accounts/account-edit/account-edit/account-edit.component';
 import { AccountEditResolver } from './_resolvers/account-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { TransactionsComponent } from './transactions/transactions/transactions.component';
+import { TransactionEditComponent } from './transactions/transaction-edit/transaction-edit.component';
+import { TransactionService } from './_services/transaction.service';
+import { TransactionEditResolver } from './_resolvers/transaction-edit.resolver';
+import { TransactionListResolver } from './_resolvers/transaction-list.resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -42,7 +47,9 @@ export function tokenGetter() {
       AccountsComponent,
       AccountDetailComponent,
       UserEditComponent,
-      AccountEditComponent
+      AccountEditComponent,
+      TransactionsComponent,
+      TransactionEditComponent
    ],
    imports: [
       BrowserModule,
@@ -69,7 +76,10 @@ export function tokenGetter() {
       AccountDetailResolver,
       AccountListResolver,
       UserEditResolver,
-      AccountEditResolver
+      AccountEditResolver,
+      TransactionService,
+      TransactionEditResolver,
+      TransactionListResolver
    ],
    bootstrap: [
       AppComponent

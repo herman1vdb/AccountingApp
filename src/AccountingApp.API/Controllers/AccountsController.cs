@@ -54,5 +54,19 @@ namespace AccountingApp.API.Controllers
 
             throw new Exception($"Updating account {id} failed on save");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateAccount(int accountId, AccountForCreationDto accountForCreationDto)
+        {
+            var account = _mapper.Map<Account>(accountForCreationDto);
+            _repo.Add<Account>(account);
+
+            if(await _repo.SaveAll())
+            {
+                return Ok();
+            }
+
+            return BadRequest("Could not add account");
+        }
     }
 }

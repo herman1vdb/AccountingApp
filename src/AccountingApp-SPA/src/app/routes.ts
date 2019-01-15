@@ -1,16 +1,17 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AccountsComponent } from './accounts/accounts/accounts.component';
-import { UserComponent } from './users/user/user.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { AccountDetailComponent } from './accounts/account-detail/account-detail.component';
 import { AccountDetailResolver } from './_resolvers/account-detail.resolver';
 import { AccountListResolver } from './_resolvers/account-list.resolver';
-import { UserEditComponent } from './users/user-edit/user-edit.component';
-import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { AccountEditResolver } from './_resolvers/account-edit.resolver';
 import { AccountEditComponent } from './accounts/account-edit/account-edit/account-edit.component';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { TransactionsComponent } from './transactions/transactions/transactions.component';
+import { TransactionListResolver } from './_resolvers/transaction-list.resolver';
+import { TransactionEditComponent } from './transactions/transaction-edit/transaction-edit.component';
+import { TransactionEditResolver } from './_resolvers/transaction-edit.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -25,9 +26,13 @@ export const appRoutes: Routes = [
                 path: 'accounts/edit/:id', component: AccountEditComponent,
                 resolve: { account: AccountEditResolver },
                 canDeactivate: [PreventUnsavedChanges]
-    },
-            { path: 'user', component: UserComponent },
-            { path: 'user/edit', component: UserEditComponent, resolve: {user: UserEditResolver} },
+            },
+            { path: 'transactions', component: TransactionsComponent, resolve: {transactions: TransactionListResolver}  },
+            {
+                path: 'transactions/edit/:id', component: TransactionEditComponent,
+                resolve: { transaction: TransactionEditResolver },
+                canDeactivate: [PreventUnsavedChanges]
+        },
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full' },

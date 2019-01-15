@@ -43,12 +43,11 @@ namespace AccountingApp.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateTransaction(int id, Transaction transactionFromUpdate)
+        public async Task<IActionResult> UpdateTransaction(int id, TransactionForUpdateDto transactionForUpdateDto)
         {
-            var transactionFromRepo = await _repo.GetObject<Transaction>(id);
-            transactionFromRepo = transactionFromUpdate;
+            var transactionFromRepo = await _repo.GetObject<Transaction>(id);            
 
-            //_mapper.Map(accountForUpdateDto, accountFromRepo);
+            _mapper.Map(transactionForUpdateDto, transactionFromRepo);
 
             if (await _repo.SaveAll())
                 return NoContent();
