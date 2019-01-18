@@ -21,4 +21,7 @@ export class AccountService {
   updateAccount(id: number, account: Account) {
     return this.http.put(this.baseUrl + 'accounts/' + id, account);
   }
+  createAccount(account: Account) {
+    return this.http.post(this.baseUrl + 'accounts/', account);
+  }
 }

@@ -32,6 +32,7 @@ import { TransactionEditComponent } from './transactions/transaction-edit/transa
 import { TransactionService } from './_services/transaction.service';
 import { TransactionEditResolver } from './_resolvers/transaction-edit.resolver';
 import { TransactionListResolver } from './_resolvers/transaction-list.resolver';
+import { AccountCreateComponent } from './accounts/account-create/account-create.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -48,6 +49,7 @@ export function tokenGetter() {
       AccountDetailComponent,
       UserEditComponent,
       AccountEditComponent,
+      AccountCreateComponent,
       TransactionsComponent,
       TransactionEditComponent
    ],

@@ -56,9 +56,14 @@ namespace AccountingApp.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAccount(int accountId, AccountForCreationDto accountForCreationDto)
+        public async Task<IActionResult> CreateAccount(AccountForCreationDto accountForCreationDto)
         {
-            var account = _mapper.Map<Account>(accountForCreationDto);
+            //var account = _mapper.Map<Account>(accountForCreationDto);
+            var account = new Account();
+            account.Description = "TESTING";
+            account.Budget = 500;
+            account.TypeId = 3;
+
             _repo.Add<Account>(account);
 
             if(await _repo.SaveAll())

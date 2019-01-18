@@ -12,6 +12,7 @@ import { TransactionsComponent } from './transactions/transactions/transactions.
 import { TransactionListResolver } from './_resolvers/transaction-list.resolver';
 import { TransactionEditComponent } from './transactions/transaction-edit/transaction-edit.component';
 import { TransactionEditResolver } from './_resolvers/transaction-edit.resolver';
+import { AccountCreateComponent } from './accounts/account-create/account-create.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -20,7 +21,8 @@ export const appRoutes: Routes = [
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         children: [
-            { path: 'accounts', component: AccountsComponent, resolve: {accounts: AccountListResolver}  },
+            { path: 'accounts', component: AccountsComponent, resolve: { accounts: AccountListResolver } },
+            { path: 'accounts/create', component: AccountCreateComponent, canDeactivate: [PreventUnsavedChanges] },
             { path: 'accounts/:id', component: AccountDetailComponent, resolve: { account: AccountDetailResolver } },
             {
                 path: 'accounts/edit/:id', component: AccountEditComponent,
