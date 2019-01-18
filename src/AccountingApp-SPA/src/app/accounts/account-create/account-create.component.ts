@@ -22,8 +22,7 @@ export class AccountCreateComponent implements OnInit {
       id: null,
       description: this.creationForm.value.description,
       TypeId: 3,
-      type: null,
-      budget: 500
+      type: null
     };
     console.log(this.account);
     this.accountService.createAccount(this.account).subscribe(next => {

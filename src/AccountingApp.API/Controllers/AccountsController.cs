@@ -60,8 +60,8 @@ namespace AccountingApp.API.Controllers
         {
             //var account = _mapper.Map<Account>(accountForCreationDto);
             var account = new Account();
-            account.Description = "TESTING";
-            account.Budget = 500;
+            account.Description = accountForCreationDto.Description;
+            account.Budget = 0;
             account.TypeId = 3;
 
             _repo.Add<Account>(account);
