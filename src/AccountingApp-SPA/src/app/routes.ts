@@ -13,6 +13,7 @@ import { TransactionListResolver } from './_resolvers/transaction-list.resolver'
 import { TransactionEditComponent } from './transactions/transaction-edit/transaction-edit.component';
 import { TransactionEditResolver } from './_resolvers/transaction-edit.resolver';
 import { AccountCreateComponent } from './accounts/account-create/account-create.component';
+import { TransactionCreateComponent } from './transactions/transaction-create/transaction-create.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -29,7 +30,8 @@ export const appRoutes: Routes = [
                 resolve: { account: AccountEditResolver },
                 canDeactivate: [PreventUnsavedChanges]
             },
-            { path: 'transactions', component: TransactionsComponent, resolve: {transactions: TransactionListResolver}  },
+            { path: 'transactions', component: TransactionsComponent, resolve: { transactions: TransactionListResolver } },
+            { path: 'transactions/create', component: TransactionCreateComponent, canDeactivate: [PreventUnsavedChanges] },
             {
                 path: 'transactions/edit/:id', component: TransactionEditComponent,
                 resolve: { transaction: TransactionEditResolver },

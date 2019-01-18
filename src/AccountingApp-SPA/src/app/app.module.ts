@@ -33,6 +33,7 @@ import { TransactionService } from './_services/transaction.service';
 import { TransactionEditResolver } from './_resolvers/transaction-edit.resolver';
 import { TransactionListResolver } from './_resolvers/transaction-list.resolver';
 import { AccountCreateComponent } from './accounts/account-create/account-create.component';
+import { TransactionCreateComponent } from './transactions/transaction-create/transaction-create.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -51,7 +52,8 @@ export function tokenGetter() {
       AccountEditComponent,
       AccountCreateComponent,
       TransactionsComponent,
-      TransactionEditComponent
+      TransactionEditComponent, 
+      TransactionCreateComponent
    ],
    imports: [
       BrowserModule,

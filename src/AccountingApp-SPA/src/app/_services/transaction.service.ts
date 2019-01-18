@@ -22,4 +22,7 @@ export class TransactionService {
   updateTransaction(id: number, transaction: Transaction) {
     return this.http.put(this.baseUrl + 'transactions/' + id, transaction);
   }
+  createTransaction(transaction: Transaction) {
+    return this.http.post(this.baseUrl + 'transactions/', transaction);
+  }
 }

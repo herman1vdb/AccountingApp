@@ -54,6 +54,27 @@ namespace AccountingApp.API.Controllers
 
             throw new Exception($"Updating transaction {id} failed on save");
         }
+
+         [HttpPost]
+        public async Task<IActionResult> CreateTransaction(TransactionForCreationDto transactionForCreationDto)
+        {
+            //var account = _mapper.Map<Account>(accountForCreationDto);
+            var transaction = new Transaction();
+            transaction.Description = transactionForCreationDto.Description;
+            transaction.DebitCredit = "Credit";
+            transaction.Date = DateTime.Now;
+            transaction.AccountId = 3;
+            transaction.Amount = 1500;
+
+            _repo.Add<Transaction>(transaction);
+ 
+            if(await _repo.SaveAll())
+            {
+                return Ok();
+            }
+
+            return BadRequest("Could not add transaction");
+        }
         
     }
 }
