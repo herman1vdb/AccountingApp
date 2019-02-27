@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AccountsComponent } from './accounts/accounts/accounts.component';
 import { AuthGuard } from './_guards/auth.guard';
-import { AccountDetailComponent } from './accounts/account-detail/account-detail.component';
 import { AccountDetailResolver } from './_resolvers/account-detail.resolver';
 import { AccountListResolver } from './_resolvers/account-list.resolver';
 import { AccountEditResolver } from './_resolvers/account-edit.resolver';
@@ -24,7 +23,6 @@ export const appRoutes: Routes = [
         children: [
             { path: 'accounts', component: AccountsComponent, resolve: { accounts: AccountListResolver } },
             { path: 'accounts/create', component: AccountCreateComponent, canDeactivate: [PreventUnsavedChanges] },
-            { path: 'accounts/:id', component: AccountDetailComponent, resolve: { account: AccountDetailResolver } },
             {
                 path: 'accounts/edit/:id', component: AccountEditComponent,
                 resolve: { account: AccountEditResolver },

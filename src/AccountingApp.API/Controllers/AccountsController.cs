@@ -29,7 +29,7 @@ namespace AccountingApp.API.Controllers
         public async Task<IActionResult> GetAccounts()
         {
             var accounts = await _repo.GetObjects<Account>();
-            var accountToReturn = _mapper.Map<IEnumerable<AccountForListDto>>(accounts);
+            var accountToReturn = _mapper.Map<IEnumerable<AccountForListDto>>(accounts);            
             return Ok(accountToReturn);
         }
 

@@ -4,6 +4,8 @@ import { Type } from './type';
 export interface Account {
     id: number;
     description: string;
-    TypeId: number;
+    typeId: number;
     type: Type;
+    budget: number;
+    isActive: boolean;
 }

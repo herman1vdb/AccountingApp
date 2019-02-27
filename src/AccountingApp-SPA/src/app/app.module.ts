@@ -19,7 +19,6 @@ import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import { AuthGuard } from './_guards/auth.guard';
 import { AccountService } from './_services/account.service';
-import { AccountDetailComponent } from './accounts/account-detail/account-detail.component';
 import { AccountDetailResolver } from './_resolvers/account-detail.resolver';
 import { AccountListResolver } from './_resolvers/account-list.resolver';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
@@ -47,7 +46,6 @@ export function tokenGetter() {
       HomeComponent,
       RegisterComponent,
       AccountsComponent,
-      AccountDetailComponent,
       UserEditComponent,
       AccountEditComponent,
       AccountCreateComponent,
