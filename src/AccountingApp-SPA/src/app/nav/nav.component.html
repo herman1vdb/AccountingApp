@@ -3,6 +3,9 @@
       <a class="navbar-brand" [routerLink]="['/home']" routerLinkActive="router-link-active" >Accounting App</a>  
       <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
           <li class="nav-item" routerLinkActive="active">
+              <a class="nav-link" [routerLink]="['/budget']">Budget</a>
+            </li> 
+          <li class="nav-item" routerLinkActive="active">
               <a class="nav-link" [routerLink]="['/transactions']">Transactions</a>
             </li> 
         <li class="nav-item"  routerLinkActive="active">

@@ -14,6 +14,8 @@ import { TransactionEditResolver } from './_resolvers/transaction-edit.resolver'
 import { AccountCreateComponent } from './accounts/account-create/account-create.component';
 import { TransactionCreateComponent } from './transactions/transaction-create/transaction-create.component';
 import { AccountCreateResolver } from './_resolvers/account-create.resolver';
+import { BudgetComponent } from './budget/budget/budget.component';
+import { BudgetDisplayResolver } from './_resolvers/budget-display.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -22,6 +24,7 @@ export const appRoutes: Routes = [
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         children: [
+            { path: 'budget', component: BudgetComponent, resolve: { budget: BudgetDisplayResolver }  },
             { path: 'accounts', component: AccountsComponent, resolve: { accounts: AccountListResolver } },
             // tslint:disable-next-line:max-line-length
             { path: 'accounts/create', component: AccountCreateComponent, resolve: {types: AccountCreateResolver} },

@@ -19,6 +19,7 @@ import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import { AuthGuard } from './_guards/auth.guard';
 import { AccountService } from './_services/account.service';
+import { BudgetService } from './_services/budget.service';
 import { AccountDetailResolver } from './_resolvers/account-detail.resolver';
 import { AccountListResolver } from './_resolvers/account-list.resolver';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
@@ -35,6 +36,8 @@ import { AccountCreateComponent } from './accounts/account-create/account-create
 import { TransactionCreateComponent } from './transactions/transaction-create/transaction-create.component';
 import { AccountCreateResolver } from './_resolvers/account-create.resolver';
 import { BudgetComponent } from './budget/budget/budget.component';
+import { BudgetDisplayComponent } from './budget/budget-display/budget-display.component';
+import { BudgetDisplayResolver } from './_resolvers/budget-display.resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -54,7 +57,8 @@ export function tokenGetter() {
       TransactionsComponent,
       TransactionEditComponent,
       TransactionCreateComponent,
-      BudgetComponent
+      BudgetComponent,
+      BudgetDisplayComponent
    ],
    imports: [
       BrowserModule,
@@ -75,6 +79,7 @@ export function tokenGetter() {
       AuthService,
       ErrorInterceptorProvider,
       AlertifyService,
+      BudgetService,
       AuthGuard,
       PreventUnsavedChanges,
       AccountService,
@@ -85,7 +90,8 @@ export function tokenGetter() {
       AccountCreateResolver,
       TransactionService,
       TransactionEditResolver,
-      TransactionListResolver
+      TransactionListResolver,
+      BudgetDisplayResolver
    ],
    bootstrap: [
       AppComponent
