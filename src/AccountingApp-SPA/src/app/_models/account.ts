@@ -7,5 +7,6 @@ export interface Account {
     typeId: number;
     type: Type;
     budget: number;
-    isActive: boolean;
+    isActive: number;
+    isControlAccount: number;
 }

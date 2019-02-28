@@ -7,6 +7,8 @@ namespace AccountingApp.API.Dtos
     {
         public int TypeId { get; set; }
         public string Description { get; set; }
-        public int Budget { get; set; }
+        public decimal Budget { get; set; }
+        public bool isActive { get; set; }    
+        public bool isControlAccount { get; set; }
     }
 }

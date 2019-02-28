@@ -13,6 +13,7 @@ import { TransactionEditComponent } from './transactions/transaction-edit/transa
 import { TransactionEditResolver } from './_resolvers/transaction-edit.resolver';
 import { AccountCreateComponent } from './accounts/account-create/account-create.component';
 import { TransactionCreateComponent } from './transactions/transaction-create/transaction-create.component';
+import { AccountCreateResolver } from './_resolvers/account-create.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -22,7 +23,8 @@ export const appRoutes: Routes = [
         canActivate: [AuthGuard],
         children: [
             { path: 'accounts', component: AccountsComponent, resolve: { accounts: AccountListResolver } },
-            { path: 'accounts/create', component: AccountCreateComponent, canDeactivate: [PreventUnsavedChanges] },
+            // tslint:disable-next-line:max-line-length
+            { path: 'accounts/create', component: AccountCreateComponent, resolve: {types: AccountCreateResolver} },
             {
                 path: 'accounts/edit/:id', component: AccountEditComponent,
                 resolve: { account: AccountEditResolver },

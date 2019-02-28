@@ -33,6 +33,13 @@ namespace AccountingApp.API.Controllers
             return Ok(accountToReturn);
         }
 
+        [HttpGet("types")]         
+        public async Task<IActionResult> GetTypes()
+        {
+            var types = await _repo.GetObjects<AccountingApp.API.Models.Type>();            
+            return Ok(types);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAccount(int id)
         {
@@ -58,12 +65,7 @@ namespace AccountingApp.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAccount(AccountForCreationDto accountForCreationDto)
         {
-            //var account = _mapper.Map<Account>(accountForCreationDto);
-            var account = new Account();
-            account.Description = accountForCreationDto.Description;
-            account.Budget = 0;
-            account.TypeId = 3;
-
+            var account = _mapper.Map<Account>(accountForCreationDto);            
             _repo.Add<Account>(account);
 
             if(await _repo.SaveAll())

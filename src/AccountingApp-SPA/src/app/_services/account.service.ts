@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Account } from '../_models/account';
+import { Type } from '../_models/type';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,9 @@ export class AccountService {
   }
   getAccount(id): Observable<Account> {
     return this.http.get<Account>(this.baseUrl + 'accounts/' + id);
+  }
+  getTypes(): Observable<Type[]> {
+    return this.http.get<Type[]>(this.baseUrl + 'types');
   }
   updateAccount(id: number, account: Account) {
     return this.http.put(this.baseUrl + 'accounts/' + id, account);
