@@ -89,10 +89,10 @@ namespace AccountingApp.API
             // if(env.IsDevelopment())
             // {
 
-            //seeder.SeedUsers();
-            //seeder.SeedTypes();
-            //seeder.SeedAccounts();
-            //seeder.SeedTransactions();
+            // seeder.SeedUsers();
+            // seeder.SeedTypes();
+            // seeder.SeedAccounts();
+            // seeder.SeedTransactions();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             //}
             app.UseAuthentication();

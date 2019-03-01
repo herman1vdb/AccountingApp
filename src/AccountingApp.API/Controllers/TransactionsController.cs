@@ -61,9 +61,9 @@ namespace AccountingApp.API.Controllers
             //var account = _mapper.Map<Account>(accountForCreationDto);
             var transaction = new Transaction();
             transaction.Description = transactionForCreationDto.Description;
-            transaction.DebitCredit = "Credit";
+            transaction.AccountDebitId = 70;
             transaction.Date = DateTime.Now;
-            transaction.AccountId = 3;
+            transaction.AccountCreditId = 71;
             transaction.Amount = 1500;
 
             _repo.Add<Transaction>(transaction);

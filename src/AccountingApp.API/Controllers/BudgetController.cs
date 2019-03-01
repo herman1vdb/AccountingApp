@@ -36,7 +36,7 @@ namespace AccountingApp.API.Controllers
             {
                 BudgetForDisplayDto budgetForDisplay = new BudgetForDisplayDto();
                 budgetForDisplay.Account = account;
-                budgetForDisplay.Transactions = transactions.Where(t => t.AccountId == budgetForDisplay.Account.Id);
+                //budgetForDisplay.Transactions = transactions.Where(t => t.AccountId == budgetForDisplay.Account.Id);
                 budgetToReturn.Add(budgetForDisplay);
             }                        
             return Ok(budgetToReturn);

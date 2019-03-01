@@ -34,7 +34,7 @@ export const appRoutes: Routes = [
                 canDeactivate: [PreventUnsavedChanges]
             },
             { path: 'transactions', component: TransactionsComponent, resolve: { transactions: TransactionListResolver } },
-            { path: 'transactions/create', component: TransactionCreateComponent, canDeactivate: [PreventUnsavedChanges] },
+            { path: 'transactions/create', component: TransactionCreateComponent},
             {
                 path: 'transactions/edit/:id', component: TransactionEditComponent,
                 resolve: { transaction: TransactionEditResolver },

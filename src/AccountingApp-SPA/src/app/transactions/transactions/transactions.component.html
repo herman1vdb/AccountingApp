@@ -1,14 +1,30 @@
-<div class="container">  
-  <div class="row">
-    <div class="col-lg-2 col-md-3 col-sm-6">
-        <button class="btn btn-default" [routerLink]="['/transactions/create']" routerLinkActive="router-link-active" >
-          Create
-      </button>
-      <div *ngFor="let transaction of transactions">{{transaction.description}} 
-        <button class="btn btn-primary" [routerLink]="['/transactions/edit/', transaction.id]" routerLinkActive="router-link-active" >
-          Edit
-        </button>
-      </div>      
-    </div>
+<div class="container">
+
+    <button class="btn btn-default" [routerLink]="['/transactions/create']" routerLinkActive="router-link-active">
+      Create
+    </button>
+    <br> 
+    <div class="accHeading">Transactions</div>
+    <br> 
+    <div *ngFor="let transaction of transactions">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-6">
+          {{transaction.date}}
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-6">
+            {{transaction.debitCredit}}
+          </div>
+        <div class="col-lg-2 col-md-3 col-sm-6">
+          {{transaction.description}}
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-6">
+          {{transaction.amount}}
+        </div>
+        <div class="col-lg-2 col-md-1 col-sm-6">
+          <button class="btn btn-primary" [routerLink]="['/transactions/edit/', transaction.id]" routerLinkActive="router-link-active">
+            Edit
+          </button>
+        </div>
+      </div>
+    </div>    
   </div>
-</div>

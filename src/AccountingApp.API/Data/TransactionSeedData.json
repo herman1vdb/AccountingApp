@@ -1,44 +1,23 @@
 [
     {
         "Date": "01/02/2019",
-        "AccountId": 2,
-        "DebitCredit": "Debit",
-        "Description": "Testing",
+        "AccountDebitId": 1,        
+        "AccountCreditId": 2,        
+        "Description": "Salary received",
         "Amount": 500
     },
     {
         "Date": "01/02/2019",
-        "AccountId": 2,
-        "DebitCredit": "Credit",
-        "Description": "Testing",
+        "AccountDebitId": 3,        
+        "AccountCreditId": 4,               
+        "Description": "Levies paid",
         "Amount": 2500
     },
     {
         "Date": "01/02/2019",
-        "AccountId": 2,
-        "DebitCredit": "Credit",
-        "Description": "Testing",
-        "Amount": 2500
-    },
-    {
-        "Date": "01/02/2019",
-        "AccountId": 2,
-        "DebitCredit": "Credit",
-        "Description": "Testing",
-        "Amount": 2500
-    },
-    {
-        "Date": "01/02/2019",
-        "AccountId": 2,
-        "DebitCredit": "Credit",
-        "Description": "Testing",
-        "Amount": 2500
-    },
-    {
-        "Date": "01/02/2019",
-        "AccountId": 2,
-        "DebitCredit": "Credit",
-        "Description": "Testing",
+        "AccountDebitId": 5,        
+        "AccountCreditId": 6,               
+        "Description": "Home Loan Payment",
         "Amount": 2500
     }
 ]

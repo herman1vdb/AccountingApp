@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AccountingApp.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190114094644_AddBudgetColumn")]
-    partial class AddBudgetColumn
+    [Migration("20190301145129_addMigrations")]
+    partial class addMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,11 +29,39 @@ namespace AccountingApp.API.Migrations
 
                     b.Property<int>("TypeId");
 
+                    b.Property<bool>("isActive");
+
+                    b.Property<bool>("isControlAccount");
+
                     b.HasKey("Id");
 
                     b.HasIndex("TypeId");
 
                     b.ToTable("Accounts");
+                });
+
+            modelBuilder.Entity("AccountingApp.API.Models.Transaction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AccountCreditId");
+
+                    b.Property<int>("AccountDebitId");
+
+                    b.Property<decimal>("Amount");
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<string>("Description");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountCreditId");
+
+                    b.HasIndex("AccountDebitId");
+
+                    b.ToTable("Transactions");
                 });
 
             modelBuilder.Entity("AccountingApp.API.Models.Type", b =>
@@ -69,6 +97,19 @@ namespace AccountingApp.API.Migrations
                     b.HasOne("AccountingApp.API.Models.Type", "Type")
                         .WithMany("Accounts")
                         .HasForeignKey("TypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("AccountingApp.API.Models.Transaction", b =>
+                {
+                    b.HasOne("AccountingApp.API.Models.Account", "AccountCredit")
+                        .WithMany()
+                        .HasForeignKey("AccountCreditId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("AccountingApp.API.Models.Account", "AccountDebit")
+                        .WithMany()
+                        .HasForeignKey("AccountDebitId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

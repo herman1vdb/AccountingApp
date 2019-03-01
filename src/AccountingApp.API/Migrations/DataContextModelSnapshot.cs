@@ -43,19 +43,21 @@ namespace AccountingApp.API.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("AccountId");
+                    b.Property<int>("AccountCreditId");
+
+                    b.Property<int>("AccountDebitId");
 
                     b.Property<decimal>("Amount");
 
                     b.Property<DateTime>("Date");
 
-                    b.Property<string>("DebitCredit");
-
                     b.Property<string>("Description");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AccountId");
+                    b.HasIndex("AccountCreditId");
+
+                    b.HasIndex("AccountDebitId");
 
                     b.ToTable("Transactions");
                 });
@@ -98,9 +100,14 @@ namespace AccountingApp.API.Migrations
 
             modelBuilder.Entity("AccountingApp.API.Models.Transaction", b =>
                 {
-                    b.HasOne("AccountingApp.API.Models.Account", "Account")
+                    b.HasOne("AccountingApp.API.Models.Account", "AccountCredit")
                         .WithMany()
-                        .HasForeignKey("AccountId")
+                        .HasForeignKey("AccountCreditId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("AccountingApp.API.Models.Account", "AccountDebit")
+                        .WithMany()
+                        .HasForeignKey("AccountDebitId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
