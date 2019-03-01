@@ -18,6 +18,7 @@ export class TransactionsComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.transactions = data['transactions'];
+      console.log(this.transactions);
     });
   }
 

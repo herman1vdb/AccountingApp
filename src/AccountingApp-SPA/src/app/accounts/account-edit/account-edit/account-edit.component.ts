@@ -26,7 +26,6 @@ export class AccountEditComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.account = data['account'];
-      console.log(this.account);
     });
   }
   updateAccount() {

@@ -1,7 +1,12 @@
+import { Account } from './account';
+
 export interface Transaction {
     id: number;
     date: Date;
-    debitCredit: string;
+    accountDebit?: Account;
+    accountDebitId: number;
+    accountCredit?: Account;
+    accountCreditId: number;
     description: string;
     amount: number;
 }

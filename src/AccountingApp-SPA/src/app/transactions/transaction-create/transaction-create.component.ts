@@ -24,8 +24,9 @@ export class TransactionCreateComponent implements OnInit {
     this.transaction = {
       id: null,
       description: this.creationForm.value.description,
+      accountDebitId: 1,
+      accountCreditId: 2,
       date: date,
-      debitCredit: null,
       amount: null
     };
     this.transactionService.createTransaction(this.transaction).subscribe(next => {

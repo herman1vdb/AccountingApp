@@ -11,7 +11,6 @@ export class BudgetDisplayResolver implements Resolve<Budget[]> {
     constructor(private budgetService: BudgetService, private router: Router, private alertify: AlertifyService) { }
 
     resolve(route: ActivatedRouteSnapshot): Observable<Budget[]> {
-        console.log('jhkhk');
         return this.budgetService.getBudget().pipe(
             catchError(err => {
                 this.alertify.error('Problem retrieving data');

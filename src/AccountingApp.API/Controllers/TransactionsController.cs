@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Linq;
 using AccountingApp.API.Data;
 using AccountingApp.API.Dtos;
 using AccountingApp.API.Models;
@@ -29,6 +30,14 @@ namespace AccountingApp.API.Controllers
         public async Task<IActionResult> GetTransactions()
         {
             var transactions = await _repo.GetObjects<Transaction>();
+             var accounts = await _repo.GetObjects<Account>();
+             
+            foreach(var transaction in transactions)
+            {
+                transaction.AccountDebit = accounts.FirstOrDefault(acc => acc.Id == transaction.AccountDebitId);
+                transaction.AccountCredit = accounts.FirstOrDefault(acc => acc.Id == transaction.AccountCreditId);
+            }                        
+            
             //var transactionToReturn = _mapper.Map<IEnumerable<AccountForListDto>>(accounts);
             return Ok(transactions);
         }

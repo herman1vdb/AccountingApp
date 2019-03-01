@@ -24,7 +24,6 @@ export class AccountCreateComponent implements OnInit {
   }
 
   createAccount() {
-    console.log(this.creationForm.value);
     this.account = {
       id: null,
       description: this.creationForm.value.description,
@@ -34,7 +33,6 @@ export class AccountCreateComponent implements OnInit {
       isActive: 1,
       isControlAccount: 0
     };
-    console.log(this.account);
     this.accountService.createAccount(this.account).subscribe(next => {
       this.alertify.success('Account updated successfully');
       this.creationForm.reset();

@@ -12,12 +12,15 @@
           {{transaction.date}}
         </div>
         <div class="col-lg-2 col-md-2 col-sm-6">
-            {{transaction.debitCredit}}
+            {{transaction.accountDebit.description}}
           </div>
-        <div class="col-lg-2 col-md-3 col-sm-6">
+          <div class="col-lg-2 col-md-2 col-sm-6">
+              {{transaction.accountCredit.description}}
+            </div>
+        <div class="col-lg-2 col-md-2 col-sm-6">
           {{transaction.description}}
         </div>
-        <div class="col-lg-2 col-md-2 col-sm-6">
+        <div class="col-lg-2 col-md-1 col-sm-6">
           {{transaction.amount}}
         </div>
         <div class="col-lg-2 col-md-1 col-sm-6">
