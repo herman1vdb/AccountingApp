@@ -12,6 +12,7 @@ namespace AccountingApp.API.Models
         public int AccountCreditId { get; set; }
         public string Description { get; set; }
         public decimal Amount { get; set; }
+        public bool Posted { get; set; }
 
     }
 }

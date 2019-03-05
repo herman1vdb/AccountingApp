@@ -17,7 +17,6 @@ export class BudgetComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.budget = data['budget'];
-      console.log(this.budget);
     });
   }
 }

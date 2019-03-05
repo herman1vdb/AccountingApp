@@ -1,39 +1,65 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-sm-4">
-        <h1>Your Profile</h1>
-    </div>
-    <div class="col-sm-8">
-      <div *ngIf="creationForm.dirty" class="alert alert-info">
-        <strong>Information:</strong> You have made changes.  Any unsaved changes will be lost!
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-4">
+        <div *ngIf="creationForm.dirty" class="alert alert-info">
+            <strong>Information:</strong> You have made changes.  Any unsaved changes will be lost!
+          </div>
       <div class="card">        
-        <div class="card-body">
+        <div class="card-body">          
           <div>
-            <strong>Location:</strong>            
+            <strong>Bank: </strong>554.54
+            <strong>Your balance: </strong>553.54            
+            <strong>Difference: </strong>1.00
           </div>                    
         </div>
         <div class="card-footer">
             <button [disabled]="!creationForm.dirty" form="creationForm" class="btn btn-success btn-block">Save Changes</button>
+            <button [disabled]="!creationForm.dirty" form="creationForm" class="btn btn-success btn-block">Post Changes</button>
         </div>
       </div>
     </div>
     <div class="col-sm-8">
-      <div class="tab-panel">
-        <tabset class="member-tabset">
-          <tab heading="Create Profile">
-            <form #creationForm="ngForm" id="creationForm" (ngSubmit)="createTransaction()">
-                <h4>Description</h4>
-                <textarea class="form-control" name="description" id="description" rows="6" 
-                  ngModel></textarea>                
-            </form>
-          </tab>
-        </tabset>
-      </div>
+        <form #creationForm="ngForm" id="creationForm" (ngSubmit)="createTransaction()">
+          <div>Choose account</div>
+            <tabset class="member-tabset">
+                <tab heading="Receipts">
+                    <table class="table table-striped">
+                        <tr>
+                          <th>Date</th>
+                          <th>Account</th>
+                          <th>Description</th>
+                          <th>Amount</th>
+                        </tr>
+                        <tr>
+                          <td><input type="date"></td>
+                          <td><input type="text"></td>
+                          <td><input type="text"></td>
+                          <td><input type="number"></td>
+                        </tr>
+            
+                      </table>
+                </tab>
+                <tab heading="Payments">
+                    <table class="table table-striped">
+                        <tr>
+                          <th>Date</th>
+                          <th>Account</th>
+                          <th>Description</th>
+                          <th>Amount</th>
+                        </tr>
+                        <tr>
+                          <td><input type="date"></td>
+                          <td><select id="account" class="form-control" ngModel name="account">
+                              <option *ngFor = "let account of accounts" [ngValue]="account">{{account.description}}</option>                
+                        </select></td>
+                          <td><input type="text"></td>
+                          <td><input type="number"></td>
+                        </tr>
+            
+                      </table>
+                  </tab>
+              </tabset>
+        </form>
     </div>
   </div>
 </div>

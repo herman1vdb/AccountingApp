@@ -4,6 +4,8 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { NgForm } from '@angular/forms';
 import { Transaction } from 'src/app/_models/transaction';
 import { TransactionService } from 'src/app/_services/transaction.service';
+import { Account } from 'src/app/_models/account';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-transaction-create',
@@ -12,13 +14,18 @@ import { TransactionService } from 'src/app/_services/transaction.service';
 })
 export class TransactionCreateComponent implements OnInit {
   transaction: Transaction;
+  accounts: Account[];
   @ViewChild('creationForm') creationForm: NgForm;
 
 
-  constructor(private transactionService: TransactionService, private alertify: AlertifyService) { }
+  constructor(private transactionService: TransactionService, private alertify: AlertifyService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.data.subscribe(data => {
+      this.accounts = data['accounts'];
+    });
   }
+
   createTransaction() {
     const date = new Date();
     this.transaction = {

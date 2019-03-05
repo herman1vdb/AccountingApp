@@ -1,3 +1,20 @@
-<p>
-  budget-display works!
-</p>
+<div *ngFor="let budgetForDisplay of budgetForDisplay">   
+  <div class="budHeading">{{budgetForDisplay.typeDescription}}</div>
+  <div *ngFor="let budget of budgetForDisplay.budgetList">    
+      <div class="row">
+          <div class="col-sm-3">{{budget.account.description}}</div>
+          <div class="col-sm-2 text-right">{{budget.account.budget  | currency : "€"}}</div>
+          <div class="col-sm-2 text-right"><strong>{{budgetForDisplay.transactionTotal | currency : "€"}}</strong></div>
+        </div>  
+  </div>  
+  <div class="row">    
+      <div class="col-sm-3"><strong>Total {{budgetForDisplay.typeDescription}}</strong></div>
+      <div class="col-sm-2 text-right"><strong>{{budgetForDisplay.total | currency : "€"}}</strong></div>      
+  </div>  
+</div>
+<div class= "budHeading"></div>
+<div class="row">    
+    <div class="col-sm-3"><strong>Grand Total</strong></div>
+    <div class="col-sm-2 text-right"><strong>{{grandTotal | currency : "€"}}</strong></div>
+</div>  
+
