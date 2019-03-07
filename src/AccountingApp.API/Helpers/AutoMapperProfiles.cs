@@ -12,6 +12,7 @@ namespace AccountingApp.API.Helpers
             CreateMap<Account, AccountForDetailedDto>();
             CreateMap<AccountForUpdateDto, Account>();
             CreateMap<AccountForCreationDto, Account>();
+            CreateMap<TransactionForCreationDto, Transaction>();
             CreateMap<TransactionForUpdateDto, Transaction>();
         }
         

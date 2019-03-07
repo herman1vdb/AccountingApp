@@ -34,6 +34,7 @@ export const appRoutes: Routes = [
                 canDeactivate: [PreventUnsavedChanges]
             },
             { path: 'transactions', component: TransactionsComponent, resolve: { transactions: TransactionListResolver } },
+            // tslint:disable-next-line:max-line-length
             { path: 'transactions/create', component: TransactionCreateComponent, resolve: { accounts: AccountListResolver } },
             {
                 path: 'transactions/edit/:id', component: TransactionEditComponent,

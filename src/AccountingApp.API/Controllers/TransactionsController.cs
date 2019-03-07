@@ -67,14 +67,7 @@ namespace AccountingApp.API.Controllers
          [HttpPost]
         public async Task<IActionResult> CreateTransaction(TransactionForCreationDto transactionForCreationDto)
         {
-            //var account = _mapper.Map<Account>(accountForCreationDto);
-            var transaction = new Transaction();
-            transaction.Description = transactionForCreationDto.Description;
-            transaction.AccountDebitId = 70;
-            transaction.Date = DateTime.Now;
-            transaction.AccountCreditId = 71;
-            transaction.Amount = 1500;
-
+            var transaction = _mapper.Map<Transaction>(transactionForCreationDto);
             _repo.Add<Transaction>(transaction);
  
             if(await _repo.SaveAll())

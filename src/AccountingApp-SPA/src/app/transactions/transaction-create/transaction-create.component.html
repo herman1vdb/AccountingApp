@@ -1,3 +1,4 @@
+
 <div class="container mt-4">
   <div class="row">
     <div class="col-sm-4">
@@ -19,44 +20,18 @@
       </div>
     </div>
     <div class="col-sm-8">
-        <form #creationForm="ngForm" id="creationForm" (ngSubmit)="createTransaction()">
-          <div>Choose account</div>
+        <form #creationForm="ngForm" id="creationForm" (change)="createTransaction()">
+          <div>
+              <td><select id="controlAccount" class="form-control" ngModel name="controlAccount">
+                  <option *ngFor = "let controlAccount of controlAccounts" [ngValue]="controlAccounts">{{controlAccount.description}}</option>                
+            </select></td>
+          </div>          
             <tabset class="member-tabset">
-                <tab heading="Receipts">
-                    <table class="table table-striped">
-                        <tr>
-                          <th>Date</th>
-                          <th>Account</th>
-                          <th>Description</th>
-                          <th>Amount</th>
-                        </tr>
-                        <tr>
-                          <td><input type="date"></td>
-                          <td><input type="text"></td>
-                          <td><input type="text"></td>
-                          <td><input type="number"></td>
-                        </tr>
-            
-                      </table>
+                <tab heading="Payments" id="payments" name="payments" (select)="selectTab($event)">
+                    <app-transaction-create-inputform [accounts]='accounts'></app-transaction-create-inputform>
                 </tab>
-                <tab heading="Payments">
-                    <table class="table table-striped">
-                        <tr>
-                          <th>Date</th>
-                          <th>Account</th>
-                          <th>Description</th>
-                          <th>Amount</th>
-                        </tr>
-                        <tr>
-                          <td><input type="date"></td>
-                          <td><select id="account" class="form-control" ngModel name="account">
-                              <option *ngFor = "let account of accounts" [ngValue]="account">{{account.description}}</option>                
-                        </select></td>
-                          <td><input type="text"></td>
-                          <td><input type="number"></td>
-                        </tr>
-            
-                      </table>
+                <tab heading="Receipts" id="receipts" name="receipts" (select)="selectTab($event)">
+                    <app-transaction-create-inputform [accounts]='accounts'></app-transaction-create-inputform>
                   </tab>
               </tabset>
         </form>

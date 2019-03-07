@@ -1,32 +1,12 @@
-<app-transaction-create></app-transaction-create>
-<div class="container">
-
-    <br>
-    <br> 
-    <div class="accHeading">Transactions</div>
-    <br> 
-    <div *ngFor="let transaction of transactions">
-      <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-6">
-          {{transaction.date}}
-        </div>
-        <div class="col-lg-2 col-md-2 col-sm-6">
-            {{transaction.accountDebit.description}}
-          </div>
-          <div class="col-lg-2 col-md-2 col-sm-6">
-              {{transaction.accountCredit.description}}
-            </div>
-        <div class="col-lg-2 col-md-2 col-sm-6">
-          {{transaction.description}}
-        </div>
-        <div class="col-lg-2 col-md-1 col-sm-6">
-          {{transaction.amount}}
-        </div>
-        <div class="col-lg-2 col-md-1 col-sm-6">
-          <button class="btn btn-primary" [routerLink]="['/transactions/edit/', transaction.id]" routerLinkActive="router-link-active">
-            Edit
-          </button>
-        </div>
-      </div>
-    </div>    
-  </div>
+    <table class="table table-striped">
+        <tr *ngFor="let transaction of transactions">
+            <td>{{transaction.date | date}}</td>
+            <td *ngIf="transactionService.selectedTab.value === 'payments'">{{transaction.accountDebit.description}}</td>
+            <td *ngIf="transactionService.selectedTab.value === 'receipts'">{{transaction.accountCredit.description}}</td>
+            <td>{{transaction.description}}</td>
+            <td>{{transaction.amount}}</td>
+            <td><button class="btn btn-primary" [routerLink]="['/transactions/edit/', transaction.id]" routerLinkActive="router-link-active">Edit</button></td>
+          </tr>
+      
+    </table>  
+    

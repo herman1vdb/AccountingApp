@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { Transaction } from '../_models/transaction';
 
 
@@ -9,6 +9,10 @@ import { Transaction } from '../_models/transaction';
   providedIn: 'root'
 })
 export class TransactionService {
+  newTransaction = new Subject<Transaction>();
+  transactionAdded = new Subject();
+  selectedTab = new BehaviorSubject<string>('payments');
+
   baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }

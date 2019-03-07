@@ -9,4 +9,5 @@ export interface Transaction {
     accountCreditId: number;
     description: string;
     amount: number;
+    posted: boolean;
 }

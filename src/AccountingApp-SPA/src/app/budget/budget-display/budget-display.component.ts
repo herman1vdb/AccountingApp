@@ -19,7 +19,6 @@ export class BudgetDisplayComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    // console.log(this.budget.map(t => t.transactions));
     this.budgetForDisplay = [];
     for (let i = 1; i < 5; i++) {
       const budgetDisp: BudgetDisplay = {
@@ -30,7 +29,6 @@ export class BudgetDisplayComponent implements OnInit {
         'typeId': i,
         'total': 0
       };
-      // console.log(budgetDisp.transactionTotal);
       budgetDisp.total = budgetDisp.budgetList.map(a => a.account.budget).reduce((sum, current) => sum + current);
       this.budgetForDisplay.push(budgetDisp);
     }
