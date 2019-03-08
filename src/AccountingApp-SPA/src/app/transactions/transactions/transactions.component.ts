@@ -11,6 +11,7 @@ import { Transaction } from '../../_models/transaction';
 })
 export class TransactionsComponent implements OnInit {
   transactions: Transaction[];
+  transactionsForDisplay: Transaction[];
   constructor(public transactionService: TransactionService, private alertify: AlertifyService, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -29,11 +30,11 @@ export class TransactionsComponent implements OnInit {
       (res) => {
         this.transactions = res.filter(t => !t.posted);
         if (this.transactionService.selectedTab.value === 'payments') {
-          this.transactions = this.transactions.filter(t => t.accountCredit.isControlAccount);
+          this.transactionsForDisplay = this.transactions.filter(t => t.accountCredit.isControlAccount);
         }
         // tslint:disable-next-line:one-line
         else if (this.transactionService.selectedTab.value === 'receipts') {
-          this.transactions = this.transactions.filter(t => t.accountDebit.isControlAccount);
+          this.transactionsForDisplay = this.transactions.filter(t => t.accountDebit.isControlAccount);
         }
       },
       (err) => {
@@ -41,5 +42,15 @@ export class TransactionsComponent implements OnInit {
       }
   );
   }
-
+  postTransactions() {
+    this.transactions.forEach(transaction => {
+      transaction.posted = true;
+      this.transactionService.updateTransaction(transaction.id, transaction).subscribe(next => {
+        this.alertify.success('Transaction updated successfully');
+      }, error => {
+        this.alertify.error(error);
+      });
+    });
+    this.getTransactions();
+  }
 }

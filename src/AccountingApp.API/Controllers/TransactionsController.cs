@@ -39,7 +39,7 @@ namespace AccountingApp.API.Controllers
             }                        
             
             //var transactionToReturn = _mapper.Map<IEnumerable<AccountForListDto>>(accounts);
-            return Ok(transactions);
+            return Ok(transactions.Reverse());
         }
 
         [HttpGet("{id}")]

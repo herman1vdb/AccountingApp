@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AccountingApp.API.Migrations
 {
-    public partial class addMigrations : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,6 +41,7 @@ namespace AccountingApp.API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    UserId = table.Column<int>(nullable: false),
                     TypeId = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     Budget = table.Column<decimal>(nullable: false),
@@ -56,6 +57,12 @@ namespace AccountingApp.API.Migrations
                         principalTable: "Types",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Accounts_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -64,11 +71,13 @@ namespace AccountingApp.API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    UserId = table.Column<int>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
                     AccountDebitId = table.Column<int>(nullable: false),
                     AccountCreditId = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true),
-                    Amount = table.Column<decimal>(nullable: false)
+                    Amount = table.Column<decimal>(nullable: false),
+                    Posted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -85,12 +94,23 @@ namespace AccountingApp.API.Migrations
                         principalTable: "Accounts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Transactions_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Accounts_TypeId",
                 table: "Accounts",
                 column: "TypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Accounts_UserId",
+                table: "Accounts",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Transactions_AccountCreditId",
@@ -101,6 +121,11 @@ namespace AccountingApp.API.Migrations
                 name: "IX_Transactions_AccountDebitId",
                 table: "Transactions",
                 column: "AccountDebitId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Transactions_UserId",
+                table: "Transactions",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -109,13 +134,13 @@ namespace AccountingApp.API.Migrations
                 name: "Transactions");
 
             migrationBuilder.DropTable(
-                name: "Users");
-
-            migrationBuilder.DropTable(
                 name: "Accounts");
 
             migrationBuilder.DropTable(
                 name: "Types");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }

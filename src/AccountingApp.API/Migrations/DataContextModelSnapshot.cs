@@ -27,6 +27,8 @@ namespace AccountingApp.API.Migrations
 
                     b.Property<int>("TypeId");
 
+                    b.Property<int>("UserId");
+
                     b.Property<bool>("isActive");
 
                     b.Property<bool>("isControlAccount");
@@ -34,6 +36,8 @@ namespace AccountingApp.API.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("TypeId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Accounts");
                 });
@@ -55,11 +59,15 @@ namespace AccountingApp.API.Migrations
 
                     b.Property<bool>("Posted");
 
+                    b.Property<int>("UserId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AccountCreditId");
 
                     b.HasIndex("AccountDebitId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Transactions");
                 });
@@ -98,6 +106,11 @@ namespace AccountingApp.API.Migrations
                         .WithMany("Accounts")
                         .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("AccountingApp.API.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("AccountingApp.API.Models.Transaction", b =>
@@ -110,6 +123,11 @@ namespace AccountingApp.API.Migrations
                     b.HasOne("AccountingApp.API.Models.Account", "AccountDebit")
                         .WithMany()
                         .HasForeignKey("AccountDebitId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("AccountingApp.API.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

@@ -19,7 +19,7 @@ export class TransactionCreateInputformComponent implements OnInit {
 
   ngOnInit() {
     this.transactionService.transactionAdded.subscribe(() => {
-      //console.log(this.descriptionElement.nativeElement());
+      // console.log(this.descriptionElement.nativeElement());
       this.creationForm.controls['account'].reset();
       this.creationForm.controls['description'].reset();
       this.creationForm.controls['amount'].reset();
