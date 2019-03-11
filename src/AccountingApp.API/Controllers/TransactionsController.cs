@@ -29,9 +29,12 @@ namespace AccountingApp.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetTransactions()
         {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;            
+            var accounts = await _repo.GetObjects<Account>();
+            accounts = accounts.Where(a => a.UserId.ToString() == userId);
             var transactions = await _repo.GetObjects<Transaction>();
-             var accounts = await _repo.GetObjects<Account>();
-             
+            transactions = transactions.Where(a => a.UserId.ToString() == userId);
+ 
             foreach(var transaction in transactions)
             {
                 transaction.AccountDebit = accounts.FirstOrDefault(acc => acc.Id == transaction.AccountDebitId);
@@ -68,13 +71,19 @@ namespace AccountingApp.API.Controllers
         public async Task<IActionResult> CreateTransaction(TransactionForCreationDto transactionForCreationDto)
         {
             var transaction = _mapper.Map<Transaction>(transactionForCreationDto);
-            _repo.Add<Transaction>(transaction);
- 
-            if(await _repo.SaveAll())
-            {
-                return Ok();
-            }
+            int uId = 0;
+            Int32.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value, out uId);
 
+            if(uId!=0)
+            {
+                transaction.UserId = uId;
+                _repo.Add<Transaction>(transaction);
+                
+                if(await _repo.SaveAll())
+                {
+                    return Ok();
+                }
+            }
             return BadRequest("Could not add transaction");
         }
         

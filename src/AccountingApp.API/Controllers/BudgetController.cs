@@ -29,8 +29,11 @@ namespace AccountingApp.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetBudget()
         {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;            
             var accounts = await _repo.GetObjects<Account>();
+            accounts = accounts.Where(a => a.UserId.ToString() == userId);
             var transactions = await _repo.GetObjects<Transaction>();
+            transactions = transactions.Where(a => a.UserId.ToString() == userId);
             List<BudgetForDisplayDto> budgetToReturn = new List<BudgetForDisplayDto>();
             foreach(var account in accounts)
             {

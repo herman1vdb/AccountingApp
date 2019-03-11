@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AccountingApp.API.Data;
@@ -28,7 +29,9 @@ namespace AccountingApp.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAccounts()
         {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;            
             var accounts = await _repo.GetObjects<Account>();
+            accounts = accounts.Where(a => a.UserId.ToString() == userId);
             var accountToReturn = _mapper.Map<IEnumerable<AccountForListDto>>(accounts);            
             return Ok(accountToReturn);
         }
@@ -51,12 +54,12 @@ namespace AccountingApp.API.Controllers
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAccount(int id, AccountForUpdateDto accountForUpdateDto)
-        {
+        {            
             var accountFromRepo = await _repo.GetObject<Account>(id);
 
-            _mapper.Map(accountForUpdateDto, accountFromRepo);
+            _mapper.Map(accountForUpdateDto, accountFromRepo);            
 
-            if (await _repo.SaveAll())
+            if (await _repo.SaveAll())            
                 return NoContent();
 
             throw new Exception($"Updating account {id} failed on save");
@@ -66,13 +69,19 @@ namespace AccountingApp.API.Controllers
         public async Task<IActionResult> CreateAccount(AccountForCreationDto accountForCreationDto)
         {
             var account = _mapper.Map<Account>(accountForCreationDto);            
-            _repo.Add<Account>(account);
-
-            if(await _repo.SaveAll())
+            int uId = 0;
+            Int32.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value, out uId);
+            
+            if(uId!=0)
             {
-                return Ok();
+                account.UserId = uId;
+                _repo.Add<Account>(account);
+                
+                if(await _repo.SaveAll())
+                {
+                    return Ok();
+                }
             }
-
             return BadRequest("Could not add account");
         }
     }
