@@ -4,8 +4,9 @@ import { Transaction } from './transaction';
 
 export interface BudgetDisplay {
     budgetList: Budget[];
-    transactionTotal: number;
     typeDescription: string;
     typeId: number;
-    total: number;
+    totalBudget: number;
+    totalTransactions: number;
+    totalDifference: number;
 }

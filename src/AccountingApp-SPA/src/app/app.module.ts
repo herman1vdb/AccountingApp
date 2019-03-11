@@ -40,6 +40,7 @@ import { BudgetDisplayComponent } from './budget/budget-display/budget-display.c
 import { BudgetDisplayResolver } from './_resolvers/budget-display.resolver';
 import { TransactionCreateInputformComponent } from './transactions/transaction-create-inputform/transaction-create-inputform.component';
 import { TransactionsConsolidationComponent } from './transactions/transactions-consolidation/transactions-consolidation.component';
+import { BudgetSummaryComponent } from './budget/budget-summary/budget-summary.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -62,7 +63,8 @@ export function tokenGetter() {
       TransactionCreateInputformComponent,
       TransactionsConsolidationComponent,
       BudgetComponent,
-      BudgetDisplayComponent
+      BudgetDisplayComponent,
+      BudgetSummaryComponent
    ],
    imports: [
       BrowserModule,
