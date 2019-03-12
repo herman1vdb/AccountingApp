@@ -1,3 +1,14 @@
+<p>Total in control accounts</p>
+
+<div *ngFor="let account of budgetSummary">
+  <div>{{account.budget.account.description}}</div>
+  <div>{{account.totalTransactions}}</div>
+</div>
+
+__________________________________
 <p>
-  budget-summary works!
+  To pay on annual basis
 </p>
+<div>Medical Aid</div>
+<div>Aanspreeklikheids Versekering</div>
+<div>HOnde belasting</div>

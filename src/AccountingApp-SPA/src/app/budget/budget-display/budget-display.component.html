@@ -1,5 +1,14 @@
 <div *ngFor="let budgetForDisplay of budgetForDisplay">   
   <div class="budHeading">{{budgetForDisplay.typeDescription}}</div>
+  <hr>
+  <div class="row">
+    <div class="col-sm-3"><strong>Account</strong></div>
+    <div class="col-sm-2 text-right"><strong>Budget</strong></div>
+    <div class="col-sm-2 text-right"><strong>Transactions</strong></div>
+    <div class="col-sm-2 text-right"><strong>Difference</strong></div>
+    <div class="col-sm-2 text-right"><strong>Notes</strong></div>      
+  </div>  
+  <hr>
   <div *ngFor="let budget of budgetForDisplay.budgetList">    
       <div class="row"  [style.color]="getColor(budget)">
           <div class="col-sm-3">{{budget.account.description}}</div>

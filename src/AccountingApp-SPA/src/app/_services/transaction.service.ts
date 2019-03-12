@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { Transaction } from '../_models/transaction';
+import { Account } from '../_models/account';
 
 
 @Injectable({
@@ -12,6 +13,7 @@ export class TransactionService {
   newTransaction = new Subject<Transaction>();
   transactionAdded = new Subject();
   selectedTab = new BehaviorSubject<string>('payments');
+  selectedControlAccount = new Subject<Account>();
 
   baseUrl = environment.apiUrl;
 

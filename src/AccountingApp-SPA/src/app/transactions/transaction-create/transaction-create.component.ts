@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, SystemJsNgModuleLoader } from '@angular/core';
 import { AccountService } from 'src/app/_services/account.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { NgForm } from '@angular/forms';
@@ -7,6 +7,7 @@ import { TransactionService } from 'src/app/_services/transaction.service';
 import { Account } from 'src/app/_models/account';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth.service';
+import { using } from 'rxjs';
 
 @Component({
   selector: 'app-transaction-create',
@@ -17,13 +18,13 @@ export class TransactionCreateComponent implements OnInit {
   transaction: Transaction;
   accounts: Account[];
   controlAccounts: Account[];
+  selectedControlAccount: Account;
 
   @ViewChild('creationForm') creationForm: NgForm;
 
   constructor(private transactionService: TransactionService, private authService: AuthService,
     private alertify: AlertifyService, private route: ActivatedRoute) { }
   ngOnInit() {
-    console.log(this.authService.decodedToken.nameid);
     this.route.data.subscribe(data => {
       this.accounts = data['accounts'];
       this.controlAccounts = this.accounts.filter(a => a.isControlAccount);
@@ -32,6 +33,10 @@ export class TransactionCreateComponent implements OnInit {
 
   selectTab(event) {
     this.transactionService.selectedTab.next(event.id);
+  }
+
+  controlSelected(event) {
+    this.transactionService.selectedControlAccount.next(this.controlAccounts.find(a => a.id.toString() === event.target.value.toString()));
   }
 
   createTransaction() {
