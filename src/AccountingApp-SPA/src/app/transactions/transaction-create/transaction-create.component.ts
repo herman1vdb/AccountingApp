@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, SystemJsNgModuleLoader } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, SystemJsNgModuleLoader, OnDestroy } from '@angular/core';
 import { AccountService } from 'src/app/_services/account.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { NgForm } from '@angular/forms';
@@ -7,19 +7,20 @@ import { TransactionService } from 'src/app/_services/transaction.service';
 import { Account } from 'src/app/_models/account';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth.service';
-import { using } from 'rxjs';
+import { using, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-transaction-create',
   templateUrl: './transaction-create.component.html',
   styleUrls: ['./transaction-create.component.css']
 })
-export class TransactionCreateComponent implements OnInit {
+export class TransactionCreateComponent implements OnInit, OnDestroy {
   transaction: Transaction;
   accounts: Account[];
   controlAccounts: Account[];
   selectedControlAccount: Account;
   displayTransactionInput: boolean;
+  subscription: Subscription;
 
   @ViewChild('creationForm') creationForm: NgForm;
 
@@ -31,14 +32,17 @@ export class TransactionCreateComponent implements OnInit {
       this.accounts = data['accounts'];
       this.controlAccounts = this.accounts.filter(a => a.isControlAccount);
     });
-    this.transactionService.newTransaction
+    this.subscription = this.transactionService.newTransaction
     .subscribe((transaction) => {
       this.transaction = transaction;
       this.assignAccountId();
-      console.log(this.transaction);
       this.saveTransaction();
     });
   }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+}
 
   selectTab(event) {
     this.transactionService.selectedTab.next(event.id);
@@ -61,13 +65,12 @@ export class TransactionCreateComponent implements OnInit {
   }
 
   assignAccountId() {
-    console.log(this.transactionService.selectedTab.value);
     if (this.transactionService.selectedTab.value === 'receipts') {
       this.transaction.accountDebitId = this.selectedControlAccount.id;
     } else if (this.transactionService.selectedTab.value === 'payments') {
       this.transaction.accountCreditId = this.selectedControlAccount.id;
     }
   }
-  }
+}
 
 
