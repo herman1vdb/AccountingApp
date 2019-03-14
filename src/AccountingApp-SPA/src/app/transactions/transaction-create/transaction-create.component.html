@@ -5,13 +5,13 @@
      <app-transactions-consolidation></app-transactions-consolidation>
     </div>
     <div class="col-sm-8">
-        <form #creationForm="ngForm" id="creationForm" (change)="createTransaction()">
+        <form #creationForm="ngForm" id="creationForm">
           <div>
               <td><select (change)="controlSelected($event)" id="controlAccount" class="form-control" ngModel name="controlAccount">
                   <option *ngFor = "let controlAccount of controlAccounts" value="{{controlAccount.id}}" [ngValue]="controlAccounts">{{controlAccount.description}}</option>                
             </select></td>
           </div>          
-            <tabset class="member-tabset">
+            <tabset *ngIf="displayTransactionInput" class="member-tabset">
                 <tab heading="Payments" id="payments" name="payments" (select)="selectTab($event)">
                     <app-transaction-create-inputform [accounts]='accounts'></app-transaction-create-inputform>
                 </tab>

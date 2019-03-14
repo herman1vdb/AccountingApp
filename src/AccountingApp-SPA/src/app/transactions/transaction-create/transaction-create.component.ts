@@ -19,15 +19,24 @@ export class TransactionCreateComponent implements OnInit {
   accounts: Account[];
   controlAccounts: Account[];
   selectedControlAccount: Account;
+  displayTransactionInput: boolean;
 
   @ViewChild('creationForm') creationForm: NgForm;
 
   constructor(private transactionService: TransactionService, private authService: AuthService,
     private alertify: AlertifyService, private route: ActivatedRoute) { }
   ngOnInit() {
+    this.displayTransactionInput = false;
     this.route.data.subscribe(data => {
       this.accounts = data['accounts'];
       this.controlAccounts = this.accounts.filter(a => a.isControlAccount);
+    });
+    this.transactionService.newTransaction
+    .subscribe((transaction) => {
+      this.transaction = transaction;
+      this.assignAccountId();
+      console.log(this.transaction);
+      this.saveTransaction();
     });
   }
 
@@ -36,33 +45,28 @@ export class TransactionCreateComponent implements OnInit {
   }
 
   controlSelected(event) {
-    this.transactionService.selectedControlAccount.next(this.controlAccounts.find(a => a.id.toString() === event.target.value.toString()));
+    this.selectedControlAccount = this.controlAccounts.find(a => a.id.toString() === event.target.value.toString());
+    this.transactionService.selectedControlAccount.next(this.selectedControlAccount);
+    this.displayTransactionInput = true;
   }
 
-  createTransaction() {
-    this.transactionService.newTransaction
-      .subscribe((transaction) => {
-        this.transaction = transaction;
-        if (this.transactionService.selectedTab.value === 'receipts') {
-          this.transaction.accountDebitId = this.creationForm.value.controlAccount[0].id;
-        } else if (this.transactionService.selectedTab.value === 'payments') {
-          this.transaction.accountCreditId = this.creationForm.value.controlAccount[0].id;
-        }
+  saveTransaction() {
+      this.transactionService.createTransaction(this.transaction).subscribe(next => {
+        this.alertify.success('Transaction added successfully');
+        this.transaction = null;
+        this.transactionService.transactionAdded.next();
+      }, error => {
+        this.alertify.error(error);
       });
-        if (this.creationForm.value.controlAccount === '' || this.creationForm.value.controlAccount === null) {
-          this.alertify.warning('Please select control account');
-        } else {
-          if (this.transaction.date.toString() !== '' && this.transaction.accountDebitId.toString() !== ''
-            && this.transaction.description !== '' && this.transaction.amount.toString() !== '') {
-            this.transactionService.createTransaction(this.transaction).subscribe(next => {
-              this.alertify.success('Transaction added successfully');
-              this.transaction = null;
-              this.transactionService.transactionAdded.next();
-            }, error => {
-              this.alertify.error(error);
-            });
-          }
-        }
+  }
+
+  assignAccountId() {
+    console.log(this.transactionService.selectedTab.value);
+    if (this.transactionService.selectedTab.value === 'receipts') {
+      this.transaction.accountDebitId = this.selectedControlAccount.id;
+    } else if (this.transactionService.selectedTab.value === 'payments') {
+      this.transaction.accountCreditId = this.selectedControlAccount.id;
+    }
   }
   }
 

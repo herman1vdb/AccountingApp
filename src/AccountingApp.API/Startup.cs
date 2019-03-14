@@ -34,8 +34,33 @@ namespace AccountingApp.API
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-            //services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("ProductionConnection")));
+        {            
+            services.AddDbContext<DataContext>(x => x.UseMySql(Configuration.GetConnectionString("DefaultConnection")));            
+            
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+            .AddJsonOptions(opt =>
+            {
+                opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+            services.AddCors();
+            services.AddAutoMapper();
+            services.AddTransient<Seed>();
+            services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IAccountingRepository, AccountingRepository>();
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+        }
+
+  public void ConfigureDevelopmentServices(IServiceCollection services)
+        {            
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DeveloperConnection")));
             
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
@@ -92,7 +117,7 @@ namespace AccountingApp.API
             // {
 
             // seeder.SeedUsers();
-            // seeder.SeedTypes();
+            //  seeder.SeedTypes();
             // seeder.SeedAccounts();
             // seeder.SeedTransactions();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());

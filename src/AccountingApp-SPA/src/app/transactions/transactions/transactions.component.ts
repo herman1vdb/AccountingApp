@@ -3,6 +3,7 @@ import { TransactionService } from '../../_services/transaction.service';
 import { AlertifyService } from '../../_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { Transaction } from '../../_models/transaction';
+import { Account } from 'src/app/_models/account';
 
 @Component({
   selector: 'app-transactions',
@@ -12,6 +13,7 @@ import { Transaction } from '../../_models/transaction';
 export class TransactionsComponent implements OnInit {
   transactions: Transaction[];
   transactionsForDisplay: Transaction[];
+  controlAccount: Account;
   constructor(public transactionService: TransactionService, private alertify: AlertifyService, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -23,6 +25,11 @@ export class TransactionsComponent implements OnInit {
     this.transactionService.selectedTab.subscribe((val) => {
       this.getTransactions();
     });
+
+    this.transactionService.selectedControlAccount.subscribe((account) => {
+      this.controlAccount = account;
+      this.getTransactions();
+    });
   }
 
   getTransactions() {
@@ -30,11 +37,11 @@ export class TransactionsComponent implements OnInit {
       (res) => {
         this.transactions = res.filter(t => !t.posted);
         if (this.transactionService.selectedTab.value === 'payments') {
-          this.transactionsForDisplay = this.transactions.filter(t => t.accountCredit.isControlAccount);
+          this.transactionsForDisplay = this.transactions.filter(t => t.accountCreditId === this.controlAccount.id);
         }
         // tslint:disable-next-line:one-line
         else if (this.transactionService.selectedTab.value === 'receipts') {
-          this.transactionsForDisplay = this.transactions.filter(t => t.accountDebit.isControlAccount);
+          this.transactionsForDisplay = this.transactions.filter(t => t.accountDebitId === this.controlAccount.id);
         }
       },
       (err) => {

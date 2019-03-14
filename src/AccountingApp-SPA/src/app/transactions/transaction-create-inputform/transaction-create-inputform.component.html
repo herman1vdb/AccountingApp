@@ -8,7 +8,7 @@
           </tr>          
           <tr>
             <td><input autofocus name='date' id='date' ngModel type="date"></td>
-            <td><select id="account" class="form-control" ngModel name="account">
+            <td><select id="account" ngModel name="account">
                 <option *ngFor = "let account of accounts" [ngValue]="account">{{account.description}}</option>                
           </select></td>
             <td><input name='description' id='description' ngModel  type="text"></td>

@@ -1,9 +1,10 @@
 <div class="card">        
     <div class="card-body">          
       <div>
-        <strong>Bank: </strong>554.54
-        <strong>Your balance: </strong>553.54            
-        <strong>Difference: </strong>1.00
+        <h4>{{description}}</h4>
+        <div>Balance on bankstatement:</div><input type="text" id="balance" (change)="balanceAdded($event)" value="{{bankBalance}}">
+        <strong>Your balance:</strong>{{totalAmount}}        
+        <strong>Difference: </strong>{{difference}}
       </div>                    
     </div>
   </div>
