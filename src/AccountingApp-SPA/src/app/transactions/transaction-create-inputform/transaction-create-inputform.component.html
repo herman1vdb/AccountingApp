@@ -1,19 +1,19 @@
   <form #creationForm="ngForm" id="creationForm" (change)="changeTransaction()">
-      <table class="table table-striped">
-          <tr>
-            <th>Date</th>
-            <th>Account</th>
-            <th>Description</th>
-            <th>Amount</th>
-          </tr>          
-          <tr>
-            <td><input autofocus name='date' id='date' ngModel type="date"></td>
-            <td><select id="account" ngModel name="account">
+    <div class="row">
+      <div class="col-md-5">Date</div>
+      <div class="col-md-3">Description</div>
+      <div class="col-md-3">Account</div>
+      <div class="col-md-1">Amount</div>
+    </div>      
+    <div class="row">
+        <div class="col-md-5"><input autofocus name='date' id='date' ngModel type="date"></div>
+        <div class="col-md-3"><input #description name='description' id='description' ngModel  type="text"></div>
+        <div class="col-md-3">
+            <select id="account" ngModel name="account">
                 <option *ngFor = "let account of accounts" [ngValue]="account">{{account.description}}</option>                
-          </select></td>
-            <td><input name='description' id='description' ngModel  type="text"></td>
-            <td><input name='amount' id='amount' ngModel  type="number"></td>
-          </tr>
-        </table>
+          </select>
+        </div>
+        <div class="col-md-1"><input name='amount' id='amount' ngModel  type="number"></div>
+      </div>      
         <app-transactions></app-transactions>
     </form>

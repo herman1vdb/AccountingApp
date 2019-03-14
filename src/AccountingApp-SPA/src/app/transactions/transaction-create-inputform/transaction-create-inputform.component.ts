@@ -18,9 +18,6 @@ export class TransactionCreateInputformComponent implements OnInit {
   constructor(public transactionService: TransactionService) { }
 
   ngOnInit() {
-    // this.transactionService.transactionAdded.subscribe(() => {
-    //   // console.log(this.descriptionElement.nativeElement());
-    // });
   }
 
   changeTransaction() {
@@ -40,6 +37,7 @@ export class TransactionCreateInputformComponent implements OnInit {
       this.creationForm.controls['account'].reset();
       this.creationForm.controls['description'].reset();
       this.creationForm.controls['amount'].reset();
+      this.descriptionElement.nativeElement.focus();
     }
   }
 }
