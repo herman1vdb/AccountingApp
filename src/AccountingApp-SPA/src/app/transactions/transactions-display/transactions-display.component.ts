@@ -61,12 +61,14 @@ export class TransactionsDisplayComponent implements OnInit, OnDestroy {
   }
   postTransactions() {
     this.transactions.forEach(transaction => {
-      transaction.posted = true;
-      this.transactionService.updateTransaction(transaction.id, transaction).subscribe(next => {
-        this.alertify.success('Transaction updated successfully');
-      }, error => {
-        this.alertify.error(error);
-      });
+        if (transaction.accountCreditId === this.controlAccount.id || transaction.accountDebitId === this.controlAccount.id) {
+          transaction.posted = true;
+          this.transactionService.updateTransaction(transaction.id, transaction).subscribe(next => {
+            this.alertify.success('Transaction updated successfully');
+          }, error => {
+            this.alertify.error(error);
+          });
+      }
     });
     this.getTransactions();
   }
