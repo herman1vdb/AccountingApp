@@ -1,0 +1,12 @@
+<table class="table table-striped">
+    <tr *ngFor="let transaction of transactionsForDisplay">
+        <td>{{transaction.date | date}}</td>
+        <td *ngIf="transactionService.selectedTab.value === 'payments'">{{transaction.accountDebit.description}}</td>
+        <td *ngIf="transactionService.selectedTab.value === 'receipts'">{{transaction.accountCredit.description}}</td>
+        <td>{{transaction.description}}</td>
+        <td>{{transaction.amount}}</td>
+        <td><button class="btn btn-primary" [routerLink]="['/transactions/edit/', transaction.id]" routerLinkActive="router-link-active">Edit</button></td>
+      </tr>
+  
+</table>  
+<button class="btn btn-success btn-block" (click)="postTransactions()">Post Transactions</button>

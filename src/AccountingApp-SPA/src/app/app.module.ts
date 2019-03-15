@@ -41,6 +41,7 @@ import { BudgetDisplayResolver } from './_resolvers/budget-display.resolver';
 import { TransactionCreateInputformComponent } from './transactions/transaction-create-inputform/transaction-create-inputform.component';
 import { TransactionsConsolidationComponent } from './transactions/transactions-consolidation/transactions-consolidation.component';
 import { BudgetSummaryComponent } from './budget/budget-summary/budget-summary.component';
+import { TransactionsDisplayComponent } from './transactions/transactions-display/transactions-display.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -61,6 +62,7 @@ export function tokenGetter() {
       TransactionEditComponent,
       TransactionCreateComponent,
       TransactionCreateInputformComponent,
+      TransactionsDisplayComponent,
       TransactionsConsolidationComponent,
       BudgetComponent,
       BudgetDisplayComponent,

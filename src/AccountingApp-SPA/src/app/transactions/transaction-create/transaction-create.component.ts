@@ -1,13 +1,10 @@
 import { Component, OnInit, ViewChild, Input, SystemJsNgModuleLoader, OnDestroy } from '@angular/core';
-import { AccountService } from 'src/app/_services/account.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { NgForm } from '@angular/forms';
 import { Transaction } from 'src/app/_models/transaction';
 import { TransactionService } from 'src/app/_services/transaction.service';
 import { Account } from 'src/app/_models/account';
-import { ActivatedRoute } from '@angular/router';
-import { AuthService } from 'src/app/_services/auth.service';
-import { using, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-transaction-create',
@@ -16,22 +13,20 @@ import { using, Subscription } from 'rxjs';
 })
 export class TransactionCreateComponent implements OnInit, OnDestroy {
   transaction: Transaction;
-  accounts: Account[];
   controlAccounts: Account[];
   selectedControlAccount: Account;
   displayTransactionInput: boolean;
   subscription: Subscription;
 
   @ViewChild('creationForm') creationForm: NgForm;
+  @Input() accounts: Account[];
 
-  constructor(private transactionService: TransactionService, private authService: AuthService,
-    private alertify: AlertifyService, private route: ActivatedRoute) { }
+  constructor(private transactionService: TransactionService, private alertify: AlertifyService) { }
+
   ngOnInit() {
     this.displayTransactionInput = false;
-    this.route.data.subscribe(data => {
-      this.accounts = data['accounts'];
-      this.controlAccounts = this.accounts.filter(a => a.isControlAccount);
-    });
+    this.controlAccounts = this.accounts.filter(a => a.isControlAccount);
+
     this.subscription = this.transactionService.newTransaction
     .subscribe((transaction) => {
       this.transaction = transaction;
@@ -49,7 +44,8 @@ export class TransactionCreateComponent implements OnInit, OnDestroy {
   }
 
   controlSelected(event) {
-    this.selectedControlAccount = this.controlAccounts.find(a => a.id.toString() === event.target.value.toString());
+    const id = event.target.value.toString();
+    this.selectedControlAccount = this.controlAccounts.find(a => a.id.toString() === id);
     this.transactionService.selectedControlAccount.next(this.selectedControlAccount);
     this.displayTransactionInput = true;
   }
