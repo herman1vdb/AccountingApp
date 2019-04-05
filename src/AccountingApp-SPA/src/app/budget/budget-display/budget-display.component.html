@@ -1,3 +1,13 @@
+<form #creationForm="ngForm" id="creationForm" (change)="changeDate($event)">  
+  <div class="row">
+      <div class="col-md-4">From Date <input autofocus name='fromDate' id='fromDate' ngModel type="date"></div>
+      <div class="col-md-4">To Date <input name='toDate' id='toDate' ngModel type="date"></div>
+    </div>              
+  </form>
+<!-- <div>
+  From<input [value]="fromDate" (change)="fromDate = $event.target.value" type="date">
+  To<input type="date" value="{{toDate}}">
+</div> -->
 <div *ngFor="let budgetForDisplay of budgetForDisplay">   
   <div class="budHeading">{{budgetForDisplay.typeDescription}}</div>
   <hr>
