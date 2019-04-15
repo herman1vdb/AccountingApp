@@ -4,13 +4,13 @@ import { BudgetDisplay } from 'src/app/_models/budgetDisplay';
 import { TypeAccount } from 'src/app/_enums/TypeAccount';
 import { calcTotalTransPerAccount } from 'src/app/_helpers/calcTotalTrans';
 import { NgForm } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-budget-display',
   templateUrl: './budget-display.component.html',
   styleUrls: ['./budget-display.component.css']
 })
-
 export class BudgetDisplayComponent implements OnInit {
   @Input() budget: Budget[];
   @ViewChild('creationForm') creationForm: NgForm;
@@ -20,25 +20,39 @@ export class BudgetDisplayComponent implements OnInit {
   grandTotalTrans: number;
   grandTotalDiff: number;
   note: string;
-  fromDate: Date;
-  toDate: Date;
+  fromDate: any;
+  toDate: any;
 
   constructor() { }
 
   ngOnInit() {
     this.budgetForDisplay = [];
-    this.fromDate = null;
-    this.toDate = null;
+    this.fromDate = moment().startOf('month').format('YYYY-MM-DD');
+    this.toDate = moment().endOf('month').format('YYYY-MM-DD');
+    this.setUpBudgetForDisplay();
+  }
+  changeFromDate(event) {
+    console.log(event);
+    this.fromDate = event;
     this.setUpBudgetForDisplay();
   }
 
-  changeDate(event) {
-    if (event.target.id === 'fromDate') {
-      this.fromDate = this.creationForm.value.fromDate;
-    } else
-      if (event.target.id === 'toDate') {
-        this.toDate = this.creationForm.value.toDate;
-      }
+
+  changeToDate(event) {
+    console.log(event);
+    this.toDate = event;
+    this.setUpBudgetForDisplay();
+  }
+
+  nextMonth() {
+    this.fromDate = moment(this.fromDate).add(1, 'month').format('YYYY-MM-DD');
+    this.toDate = moment(this.toDate).add(1, 'month').endOf('month').format('YYYY-MM-DD');
+    this.setUpBudgetForDisplay();
+  }
+
+  previousMonth() {
+    this.fromDate = moment(this.fromDate).add(-1, 'month').format('YYYY-MM-DD');
+    this.toDate = moment(this.toDate).add(-1, 'month').endOf('month').format('YYYY-MM-DD');
     this.setUpBudgetForDisplay();
   }
 
@@ -50,7 +64,7 @@ export class BudgetDisplayComponent implements OnInit {
         'budgetList': copiedBudget.filter(b => b.account.typeId === i
           && !b.account.isControlAccount
           && b.account.isActive
-          && b.account.budget !== 0),
+        ),
         'typeDescription': TypeAccount[i].toString(),
         'typeId': i,
         'totalBudget': 0,
@@ -59,6 +73,8 @@ export class BudgetDisplayComponent implements OnInit {
       };
       this.budgetListByDate(budgetDisp);
       this.calculateTotals(budgetDisp);
+      budgetDisp.budgetList = budgetDisp.budgetList.filter(b => b.account.budget !== 0
+        || b.totalTransactionsPerAcc !== 0);
       this.budgetForDisplay.push(budgetDisp);
     }
     this.calculateGrandTotal();
@@ -67,7 +83,6 @@ export class BudgetDisplayComponent implements OnInit {
   }
 
   budgetListByDate(budgetDisp) {
-    console.log(this.fromDate);
     budgetDisp.budgetList.forEach(b => {
       if (this.fromDate !== null && this.toDate !== null && this.fromDate.toString() !== '' && this.fromDate.toString() !== '') {
         b.transactions = b.transactions.filter(t => t.date >= this.fromDate && t.date <= this.toDate);
