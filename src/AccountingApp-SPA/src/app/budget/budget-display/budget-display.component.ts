@@ -32,7 +32,6 @@ export class BudgetDisplayComponent implements OnInit {
     this.setUpBudgetForDisplay();
   }
   changeFromDate(event) {
-    console.log(event);
     this.fromDate = event;
     this.setUpBudgetForDisplay();
   }
@@ -85,7 +84,9 @@ export class BudgetDisplayComponent implements OnInit {
   budgetListByDate(budgetDisp) {
     budgetDisp.budgetList.forEach(b => {
       if (this.fromDate !== null && this.toDate !== null && this.fromDate.toString() !== '' && this.fromDate.toString() !== '') {
-        b.transactions = b.transactions.filter(t => t.date >= this.fromDate && t.date <= this.toDate);
+        console.log(b.transactions);
+        b.transactions = b.transactions.filter(t => t.date >= this.fromDate && moment(t.date).format('YYYY-MM-DD')
+          <= moment(this.toDate).format('YYYY-MM-DD'));
       }
       b.totalTransactionsPerAcc = calcTotalTransPerAccount(b.transactions, b.account);
       b.totalDifferencePerAcc = this.calculateDifferencePerAccount(b);

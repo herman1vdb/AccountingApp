@@ -59,6 +59,15 @@ export class TransactionsDisplayComponent implements OnInit, OnDestroy {
       }
   );
   }
+
+  deleteTransaction(id) {
+    this.transactionService.removeTransaction(id).subscribe(next => {
+      this.alertify.success('Transaction removed successfully');
+      this.getTransactions();
+    }, error => {
+      this.alertify.error(error);
+    });
+  }
   postTransactions() {
     this.transactions.forEach(transaction => {
         if (transaction.accountCreditId === this.controlAccount.id || transaction.accountDebitId === this.controlAccount.id) {

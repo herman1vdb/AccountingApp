@@ -31,4 +31,7 @@ export class TransactionService {
   createTransaction(transaction: Transaction) {
     return this.http.post(this.baseUrl + 'transactions/', transaction);
   }
+  removeTransaction(id: number) {
+    return this.http.delete(this.baseUrl + 'transactions/' + id);
+  }
 }

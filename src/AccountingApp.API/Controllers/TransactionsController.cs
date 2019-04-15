@@ -67,6 +67,19 @@ namespace AccountingApp.API.Controllers
             throw new Exception($"Updating transaction {id} failed on save");
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteTransaction(int id)
+        {
+            var transaction = await _repo.GetObject<Transaction>(id);
+            _repo.Delete<Transaction>(transaction);
+
+             if(await _repo.SaveAll())
+                {
+                    return Ok();
+                }
+            return BadRequest("Could not remove transaction");
+        }
+
          [HttpPost]
         public async Task<IActionResult> CreateTransaction(TransactionForCreationDto transactionForCreationDto)
         {
