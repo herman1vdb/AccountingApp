@@ -27,6 +27,7 @@ export class AccountEditComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.account = data['account'];
     });
+    console.log(this.account);
   }
   updateAccount() {
     this.accountService.updateAccount(this.account.id, this.account).subscribe(next => {

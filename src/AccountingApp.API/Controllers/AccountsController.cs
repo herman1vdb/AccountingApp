@@ -29,17 +29,17 @@ namespace AccountingApp.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAccounts()
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;            
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var accounts = await _repo.GetObjects<Account>();
             accounts = accounts.Where(a => a.UserId.ToString() == userId);
-            var accountToReturn = _mapper.Map<IEnumerable<AccountForListDto>>(accounts);            
+            var accountToReturn = _mapper.Map<IEnumerable<AccountForListDto>>(accounts);
             return Ok(accountToReturn);
         }
 
-        [HttpGet("types")]         
+        [HttpGet("types")]
         public async Task<IActionResult> GetTypes()
         {
-            var types = await _repo.GetObjects<AccountingApp.API.Models.Type>();            
+            var types = await _repo.GetObjects<AccountingApp.API.Models.Type>();
             return Ok(types);
         }
 
@@ -47,19 +47,17 @@ namespace AccountingApp.API.Controllers
         public async Task<IActionResult> GetAccount(int id)
         {
             var account = await _repo.GetObject<Account>(id);
-
-            var accountToReturn = _mapper.Map<AccountForDetailedDto>(account);
-            return Ok(accountToReturn);
+            return Ok(account);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAccount(int id, AccountForUpdateDto accountForUpdateDto)
-        {            
+        {
             var accountFromRepo = await _repo.GetObject<Account>(id);
 
-            _mapper.Map(accountForUpdateDto, accountFromRepo);            
+            _mapper.Map(accountForUpdateDto, accountFromRepo);
 
-            if (await _repo.SaveAll())            
+            if (await _repo.SaveAll())
                 return NoContent();
 
             throw new Exception($"Updating account {id} failed on save");
@@ -68,16 +66,16 @@ namespace AccountingApp.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAccount(AccountForCreationDto accountForCreationDto)
         {
-            var account = _mapper.Map<Account>(accountForCreationDto);            
+            var account = _mapper.Map<Account>(accountForCreationDto);
             int uId = 0;
             Int32.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value, out uId);
-            
-            if(uId!=0)
+
+            if (uId != 0)
             {
                 account.UserId = uId;
                 _repo.Add<Account>(account);
-                
-                if(await _repo.SaveAll())
+
+                if (await _repo.SaveAll())
                 {
                     return Ok();
                 }
