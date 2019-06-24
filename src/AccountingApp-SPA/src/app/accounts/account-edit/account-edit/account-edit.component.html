@@ -1,13 +1,8 @@
-<div class="containter">
+<div class="container mt-4">
   <h1>Edit account</h1>
   <div *ngIf="editForm.dirty" class="alert alert-info">
     <strong>Information:</strong> You have made changes. Any unsaved changes will be lost!
-  </div>
-  <div class="card">
-    <div class="card-footer">
-      <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-success btn-block">Save Changes</button>
-    </div>
-  </div>
+  </div>  
   <form #editForm="ngForm" id="editForm" (ngSubmit)="updateAccount()">
     <h4>Description</h4>
     <input class="form-control" name="description" [(ngModel)]="account.description" />
@@ -18,4 +13,9 @@
     <h4>Is Control Account</h4>
     <input class="form-control" name="isControlAccount" [(ngModel)]="account.isControlAccount" />
   </form>
+  <div class="card">
+    <div class="card-footer">
+      <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-success btn-block">Save Changes</button>
+    </div>
+  </div>
 </div>
