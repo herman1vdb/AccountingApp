@@ -42,6 +42,9 @@ import { TransactionCreateInputformComponent } from './transactions/transaction-
 import { TransactionsConsolidationComponent } from './transactions/transactions-consolidation/transactions-consolidation.component';
 import { BudgetSummaryComponent } from './budget/budget-summary/budget-summary.component';
 import { TransactionsDisplayComponent } from './transactions/transactions-display/transactions-display.component';
+import { ReportComponent } from './reports/report/report.component';
+import { ReportAccountComponent } from './reports/report-account/report-account.component';
+import { ReportFilterComponent } from './reports/report-filter/report-filter.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -66,7 +69,10 @@ export function tokenGetter() {
       TransactionsConsolidationComponent,
       BudgetComponent,
       BudgetDisplayComponent,
-      BudgetSummaryComponent
+      BudgetSummaryComponent,
+      ReportComponent,
+      ReportAccountComponent,
+      ReportFilterComponent
    ],
    imports: [
       BrowserModule,
