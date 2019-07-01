@@ -1,3 +1,17 @@
-<p>
-  report-filter works!
-</p>
+<!-- From Date <input type="date"> -->
+<div>
+  <select (change)="filterByAccount($event)">
+    <option value="">Please select</option>
+    <option id="account.id" *ngFor="let account of accounts">{{account.description}}</option>
+  </select>
+</div>
+<div>
+  <label for="">From</label><input (change)=filterByDate($event) id="fromDate" type="date">
+  <label for="">To</label><input (change)=filterByDate($event) id="toDate" type="date">
+</div>
+
+<button class="btn btn-primary btn-sm mr-2" (click)="filterByKeyword()">
+  Filter by keywords
+</button>
+
+<app-report-display-transactions [transactions]="filteredTransactions"></app-report-display-transactions>

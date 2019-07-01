@@ -15,8 +15,8 @@ import { AccountCreateResolver } from "./_resolvers/account-create.resolver";
 import { BudgetComponent } from "./budget/budget/budget.component";
 import { BudgetDisplayResolver } from "./_resolvers/budget-display.resolver";
 import { ReportComponent } from "./reports/report/report.component";
-import { ReportAccountComponent } from "./reports/report-account/report-account.component";
 import { TransactionListResolver } from "./_resolvers/transaction-list.resolver";
+import { ReportFilterComponent } from "./reports/report-filter/report-filter.component";
 
 export const appRoutes: Routes = [
   { path: "", component: HomeComponent },
@@ -58,14 +58,16 @@ export const appRoutes: Routes = [
         resolve: { transaction: TransactionEditResolver },
         canDeactivate: [PreventUnsavedChanges]
       },
-        { path: "reports", component: ReportComponent },
-        {
-            path: "report/account",
-            component: ReportAccountComponent,
-            resolve: { transactions: TransactionListResolver }
+      { path: "reports", component: ReportComponent },
+      {
+        path: "report/filter",
+        component: ReportFilterComponent,
+        resolve: {
+          transactions: TransactionListResolver,
+          accounts: AccountListResolver
         }
+      }
     ]
   },
   { path: "**", redirectTo: "", pathMatch: "full" }
- 
 ];
