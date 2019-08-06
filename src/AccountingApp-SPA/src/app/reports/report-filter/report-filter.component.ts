@@ -3,6 +3,7 @@ import { Transaction } from "src/app/_models/transaction";
 import { Account } from "src/app/_models/account";
 import { ActivatedRoute } from "@angular/router";
 import * as moment from "moment";
+import { DecimalPipe } from "@angular/common";
 
 @Component({
   selector: "app-report-filter",
@@ -13,8 +14,12 @@ export class ReportFilterComponent implements OnInit {
   transactions: Transaction[];
   filteredTransactions: Transaction[];
   accounts: Account[];
+  selectedAccount: string;
   fromDate: Date;
   toDate: Date;
+  keyword: string;
+  total: number;
+
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
@@ -36,7 +41,32 @@ export class ReportFilterComponent implements OnInit {
         return;
       }
     }
-    this.filteredTransactions = this.transactions.filter(
+    this.filterDate(this.transactions);
+
+    if (this.selectedAccount) {
+      this.filterAccount(this.filteredTransactions);
+    }
+    this.sumValues();
+  }
+
+  filterByAccount(event) {
+    this.selectedAccount = event.target.value;
+    this.filterAccount(this.transactions);
+    if (this.fromDate && this.toDate) {
+      this.filterDate(this.filteredTransactions);
+    }
+    this.sumValues();
+  }
+  filterByKeyword(event) {
+    this.keyword = event.target.value;
+    console.log(this.keyword);
+    this.filteredTransactions = this.transactions.filter(t =>
+      t.description.toLowerCase().includes(this.keyword.toLowerCase())
+    );
+  }
+
+  filterDate(transactions) {
+    this.filteredTransactions = transactions.filter(
       t =>
         t.date >= this.fromDate &&
         moment(t.date).format("YYYY-MM-DD") <=
@@ -44,14 +74,18 @@ export class ReportFilterComponent implements OnInit {
     );
   }
 
-  filterByAccount(event) {
-    this.filteredTransactions = this.transactions.filter(
+  filterAccount(transactions) {
+    this.filteredTransactions = transactions.filter(
       t =>
-        t.accountDebit.description === event.target.value ||
-        t.accountCredit.description === event.target.value
+        t.accountDebit.description === this.selectedAccount ||
+        t.accountCredit.description === this.selectedAccount
     );
   }
-  filterByKeyword() {
-    alert("HALLO");
+
+  sumValues() {
+    this.total = this.filteredTransactions.reduce(
+      (sum, current) => sum + current.amount,
+      0
+    );
   }
 }

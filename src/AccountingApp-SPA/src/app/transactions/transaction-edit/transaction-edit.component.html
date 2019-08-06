@@ -7,10 +7,22 @@
     <input class="form-control" name="date" [(ngModel)]="transaction.date" />
     <h4>Description</h4>
     <input class="form-control" name="description" [(ngModel)]="transaction.description" />
+
+
+
     <h4>Account to debit</h4>
-    <input class="form-control" name="accountDebitId" [(ngModel)]="transaction.accountDebit.description" />
+
+    <select class="form-control" id="accountDebitId" [(ngModel)]="transaction.accountDebitId" name="accountDebitId">
+      <option *ngFor="let account of accounts" [ngValue]="account.id">
+        {{account.description}}</option>
+    </select>
+
     <h4>Account to credit</h4>
-    <input class="form-control" name="accountCreditId" [(ngModel)]="transaction.accountCredit.description" />
+
+    <select class="form-control" id="accountCreditId" [(ngModel)]="transaction.accountCreditId" name="accountCreditId">
+      <option *ngFor="let account of accounts" [ngValue]="account.id">
+        {{account.description}}</option>
+    </select>
     <h4>Amount</h4>
     <input class="form-control" name="amount" [(ngModel)]="transaction.amount" />
   </form>

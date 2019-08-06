@@ -29,18 +29,18 @@ namespace AccountingApp.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetTransactions()
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;            
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var accounts = await _repo.GetObjects<Account>();
             accounts = accounts.Where(a => a.UserId.ToString() == userId);
             var transactions = await _repo.GetObjects<Transaction>();
             transactions = transactions.Where(a => a.UserId.ToString() == userId);
- 
-            foreach(var transaction in transactions)
+
+            foreach (var transaction in transactions)
             {
                 transaction.AccountDebit = accounts.FirstOrDefault(acc => acc.Id == transaction.AccountDebitId);
                 transaction.AccountCredit = accounts.FirstOrDefault(acc => acc.Id == transaction.AccountCreditId);
-            }                        
-            
+            }
+
             //var transactionToReturn = _mapper.Map<IEnumerable<AccountForListDto>>(accounts);
             return Ok(transactions.Reverse());
         }
@@ -73,32 +73,32 @@ namespace AccountingApp.API.Controllers
             var transaction = await _repo.GetObject<Transaction>(id);
             _repo.Delete<Transaction>(transaction);
 
-             if(await _repo.SaveAll())
-                {
-                    return Ok();
-                }
+            if (await _repo.SaveAll())
+            {
+                return Ok();
+            }
             return BadRequest("Could not remove transaction");
         }
 
-         [HttpPost]
+        [HttpPost]
         public async Task<IActionResult> CreateTransaction(TransactionForCreationDto transactionForCreationDto)
         {
             var transaction = _mapper.Map<Transaction>(transactionForCreationDto);
             int uId = 0;
             Int32.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value, out uId);
 
-            if(uId!=0)
+            if (uId != 0)
             {
                 transaction.UserId = uId;
                 _repo.Add<Transaction>(transaction);
-                
-                if(await _repo.SaveAll())
+
+                if (await _repo.SaveAll())
                 {
                     return Ok();
                 }
             }
             return BadRequest("Could not add transaction");
         }
-        
+
     }
 }

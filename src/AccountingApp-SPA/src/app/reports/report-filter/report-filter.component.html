@@ -10,8 +10,14 @@
   <label for="">To</label><input (change)=filterByDate($event) id="toDate" type="date">
 </div>
 
-<button class="btn btn-primary btn-sm mr-2" (click)="filterByKeyword()">
-  Filter by keywords
-</button>
+<div>
+  <label>Search Description</label> <input (input)="filterByKeyword($event)" id="keyword" type="text">
+</div>
+<div *ngIf="filteredTransactions">
+  <app-report-display-transactions [transactions]="filteredTransactions"></app-report-display-transactions>
 
-<app-report-display-transactions [transactions]="filteredTransactions"></app-report-display-transactions>
+  <div class="container">
+    <div>TOTAL</div>
+    <div>{{total | currency: 'EUR':true}}</div>
+  </div>
+</div>

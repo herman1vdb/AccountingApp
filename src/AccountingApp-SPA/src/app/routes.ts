@@ -55,7 +55,10 @@ export const appRoutes: Routes = [
       {
         path: "transactions/edit/:id",
         component: TransactionEditComponent,
-        resolve: { transaction: TransactionEditResolver },
+        resolve: {
+          transaction: TransactionEditResolver,
+          accounts: AccountListResolver
+        },
         canDeactivate: [PreventUnsavedChanges]
       },
       { path: "reports", component: ReportComponent },

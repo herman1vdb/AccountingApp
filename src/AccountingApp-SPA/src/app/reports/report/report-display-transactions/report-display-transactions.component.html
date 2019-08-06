@@ -16,6 +16,7 @@
       <td>{{transaction.accountDebit.description}}</td>
       <td>{{transaction.accountCredit.description}}</td>
       <td>{{transaction.amount}}</td>
+      <td><button (click)="deleteTransaction(transaction.id)" class="btn btn-danger">Delete</button></td>
     </tr>
   </table>
 </div>
