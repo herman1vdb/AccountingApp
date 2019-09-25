@@ -45,6 +45,8 @@ import { TransactionsDisplayComponent } from "./transactions/transactions-displa
 import { ReportComponent } from "./reports/report/report.component";
 import { ReportFilterComponent } from "./reports/report-filter/report-filter.component";
 import { ReportDisplayTransactionsComponent } from "./reports/report/report-display-transactions/report-display-transactions.component";
+import { ReportChartComponent } from "./reports/report-chart/report-chart.component";
+import { ChartsModule } from "ng2-charts";
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -72,9 +74,11 @@ export function tokenGetter() {
     BudgetSummaryComponent,
     ReportComponent,
     ReportDisplayTransactionsComponent,
-    ReportFilterComponent
+    ReportFilterComponent,
+    ReportChartComponent
   ],
   imports: [
+    ChartsModule,
     BrowserModule,
     HttpClientModule,
     FormsModule,

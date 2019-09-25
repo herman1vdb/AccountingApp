@@ -17,6 +17,7 @@ import { BudgetDisplayResolver } from "./_resolvers/budget-display.resolver";
 import { ReportComponent } from "./reports/report/report.component";
 import { TransactionListResolver } from "./_resolvers/transaction-list.resolver";
 import { ReportFilterComponent } from "./reports/report-filter/report-filter.component";
+import { ReportChartComponent } from "./reports/report-chart/report-chart.component";
 
 export const appRoutes: Routes = [
   { path: "", component: HomeComponent },
@@ -65,6 +66,14 @@ export const appRoutes: Routes = [
       {
         path: "report/filter",
         component: ReportFilterComponent,
+        resolve: {
+          transactions: TransactionListResolver,
+          accounts: AccountListResolver
+        }
+      },
+        {
+        path: "report/chart",
+        component: ReportChartComponent,
         resolve: {
           transactions: TransactionListResolver,
           accounts: AccountListResolver
