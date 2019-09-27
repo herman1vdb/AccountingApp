@@ -33,7 +33,7 @@ export class TransactionCreateInputformComponent implements OnInit {
     };
 
     if (transaction.date.toString() !== '' && transaction.accountDebitId.toString() !== ''
-      && transaction.description !== '' && transaction.amount.toString() !== '') {
+      && transaction.description !== '' && transaction.amount.toString() !== '') {      
       this.transactionService.newTransaction.next(transaction);
       this.creationForm.controls['account'].reset();
       this.creationForm.controls['description'].reset();
