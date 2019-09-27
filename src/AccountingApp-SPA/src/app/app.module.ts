@@ -51,6 +51,7 @@ import { ReportExpincChartComponent } from "./reports/report-chart/report-expinc
 import { ReportLiabassetsChartComponent } from "./reports/report-chart/report-liabassets-chart/report-liabassets-chart.component";
 
 import { ReportAccountChartComponent } from "./reports/report-chart/report-account-chart/report-account-chart.component";
+import { UpdatePasswordComponent } from "./users/updatePassword/updatePassword.component";
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -82,8 +83,8 @@ export function tokenGetter() {
     ReportChartComponent,
     ReportExpincChartComponent,
     ReportLiabassetsChartComponent,
-
-    ReportAccountChartComponent
+    ReportAccountChartComponent,
+    UpdatePasswordComponent
   ],
   imports: [
     ChartsModule,

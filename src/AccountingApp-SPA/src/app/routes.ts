@@ -21,6 +21,7 @@ import { ReportChartComponent } from "./reports/report-chart/report-chart.compon
 import { ReportExpincChartComponent } from "./reports/report-chart/report-expinc-chart/report-expinc-chart.component";
 import { ReportLiabassetsChartComponent } from "./reports/report-chart/report-liabassets-chart/report-liabassets-chart.component";
 import { ReportAccountChartComponent } from "./reports/report-chart/report-account-chart/report-account-chart.component";
+import { UpdatePasswordComponent } from "./users/updatePassword/updatePassword.component";
 
 export const appRoutes: Routes = [
   { path: "", component: HomeComponent },
@@ -65,6 +66,9 @@ export const appRoutes: Routes = [
         },
         canDeactivate: [PreventUnsavedChanges]
       },
+
+
+      { path: "updatepassword", component: UpdatePasswordComponent },      
       { path: "reports", component: ReportComponent },
       {
         path: "report/filter",

@@ -11,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 namespace AccountingApp.API.Controllers
-{    
+{
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
@@ -28,14 +28,22 @@ namespace AccountingApp.API.Controllers
 
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
-        {           
+        {
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
 
             if (await _repo.UserExist(userForRegisterDto.Username))
-                return BadRequest("Username already exists");            
+                return BadRequest("Username already exists");
 
             var createdUser = await _repo.Register(userForRegisterDto);
 
+            return StatusCode(201);
+        }
+
+        [HttpPost("update")]
+        public async Task<IActionResult> UpdatePassword(UserForUpdateDto userForUpdate)
+        {
+            userForUpdate.Username = userForUpdate.Username.ToLower();
+            var updatedUser = await _repo.UpdatePassword(userForUpdate);
             return StatusCode(201);
         }
 
@@ -46,7 +54,7 @@ namespace AccountingApp.API.Controllers
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
             var userFromRepo = await _repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
-            if(userFromRepo==null)
+            if (userFromRepo == null)
                 return Unauthorized();
 
             var claims = new[]
@@ -54,7 +62,7 @@ namespace AccountingApp.API.Controllers
                 new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
                 new Claim(ClaimTypes.Name, userFromRepo.Username)
             };
-            
+
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
             var tokenDescriptor = new SecurityTokenDescriptor
