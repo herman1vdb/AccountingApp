@@ -2,7 +2,7 @@
 
 <div *ngFor="let account of budgetSummary">
   <div>{{account.budget.account.description}}</div>
-  <div>{{account.totalTransactions}}</div>
+  <div>{{account.totalTransactions | currency}}</div>
 </div>
 
 __________________________________

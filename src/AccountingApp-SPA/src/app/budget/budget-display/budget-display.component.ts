@@ -133,9 +133,9 @@ export class BudgetDisplayComponent implements OnInit {
     }
     if (budget.account.budget < budget.totalTransactionsPerAcc) {
       this.note = 'Over';
-      return 'yellow';
+      return 'orange';
     }
     this.note = '';
-    return 'white';
+    return 'black';
   }
 }
