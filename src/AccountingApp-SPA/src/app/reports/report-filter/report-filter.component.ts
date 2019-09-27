@@ -58,8 +58,7 @@ export class ReportFilterComponent implements OnInit {
     this.sumValues();
   }
   filterByKeyword(event) {
-    this.keyword = event.target.value;
-    console.log(this.keyword);
+    this.keyword = event.target.value;    
     this.filteredTransactions = this.transactions.filter(t =>
       t.description.toLowerCase().includes(this.keyword.toLowerCase())
     );

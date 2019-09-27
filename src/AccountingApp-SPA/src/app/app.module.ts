@@ -49,7 +49,7 @@ import { ReportChartComponent } from "./reports/report-chart/report-chart.compon
 import { ChartsModule } from "ng2-charts";
 import { ReportExpincChartComponent } from "./reports/report-chart/report-expinc-chart/report-expinc-chart.component";
 import { ReportLiabassetsChartComponent } from "./reports/report-chart/report-liabassets-chart/report-liabassets-chart.component";
-import { ReportCashflowChartComponent } from "./reports/report-chart/report-cashflow-chart/report-cashflow-chart.component";
+
 import { ReportAccountChartComponent } from "./reports/report-chart/report-account-chart/report-account-chart.component";
 
 export function tokenGetter() {
@@ -82,7 +82,7 @@ export function tokenGetter() {
     ReportChartComponent,
     ReportExpincChartComponent,
     ReportLiabassetsChartComponent,
-    ReportCashflowChartComponent,
+
     ReportAccountChartComponent
   ],
   imports: [

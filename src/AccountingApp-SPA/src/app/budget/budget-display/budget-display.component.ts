@@ -37,8 +37,7 @@ export class BudgetDisplayComponent implements OnInit {
   }
 
 
-  changeToDate(event) {
-    console.log(event);
+  changeToDate(event) {    
     this.toDate = event;
     this.setUpBudgetForDisplay();
   }
@@ -83,8 +82,7 @@ export class BudgetDisplayComponent implements OnInit {
 
   budgetListByDate(budgetDisp) {
     budgetDisp.budgetList.forEach(b => {
-      if (this.fromDate !== null && this.toDate !== null && this.fromDate.toString() !== '' && this.fromDate.toString() !== '') {
-        console.log(b.transactions);
+      if (this.fromDate !== null && this.toDate !== null && this.fromDate.toString() !== '' && this.fromDate.toString() !== '') {        
         b.transactions = b.transactions.filter(t => t.date >= this.fromDate && moment(t.date).format('YYYY-MM-DD')
           <= moment(this.toDate).format('YYYY-MM-DD'));
       }

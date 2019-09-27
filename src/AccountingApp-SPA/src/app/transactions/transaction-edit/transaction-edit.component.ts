@@ -41,8 +41,7 @@ export class TransactionEditComponent implements OnInit {
     });
   }
 
-  updateTransaction() {
-    console.log(this.transaction);
+  updateTransaction() {    
     this.transactionService
       .updateTransaction(this.transaction.id, this.transaction)
       .subscribe(

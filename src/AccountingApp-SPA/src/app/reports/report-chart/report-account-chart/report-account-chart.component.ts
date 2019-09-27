@@ -17,43 +17,24 @@ export class ReportAccountChartComponent implements OnInit {
   accounts: Account[];
   selectedAccount: Account;
   displayTransactionTotals: Transaction[];
-
-  public barChartOptions = {
-    scaleShowVerticalLines: false,
-    responsive: true
-  };
-  public barChartLabels = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September"
-  ];
-  public barChartType = "bar";
-  public barChartLegend = true;
-  public barChartData = [];
+  chartData: any;
 
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.transactions = data["transactions"];
       this.accounts = data["accounts"];
     });
+    this.getBarChartData();
   }
 
   getBarChartData() {
-    this.barChartData = [
+    this.chartData = [
       {
         data: [],
         label: this.selectedAccount.description
       }
-      // { data: [28, 48, 40, 19, 86, 27, 90], label: "Series B" }
-      // Income and expenses also add as chart
     ];
-    this.barChartData.forEach(c => {
+    this.chartData.forEach(c => {
       for (let i = 0; i < 12; i++) {
         c.data.push(this.accountTotalByMonth(this.selectedAccount, i));
       }

@@ -1,5 +1,6 @@
 import { Transaction } from "../_models/transaction";
 import { Account } from "../_models/account";
+import * as moment from 'moment';
 
 var totals = { debits: 0, credits: 0 };
 
@@ -44,8 +45,11 @@ export function calcTotalTransPerType(
   return calculateTotal(typeId);
 }
 
-
-
+export function typeTotalByMonth(month, type, transactions) {  
+  return calcTotalTransPerType(transactions.filter(t => {
+    return moment(t.date).month() === month;
+  }), type);
+}
 
 function sumTransactions(transactions, typeTrans) {
   if (transactions.length > 0) {

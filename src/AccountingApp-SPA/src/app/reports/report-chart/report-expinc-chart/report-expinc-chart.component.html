@@ -1,7 +1,1 @@
-  
-  
-  <div *ngIf="filteredTransactions" style="display: block">
-    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
-      [legend]="barChartLegend" [chartType]="barChartType">
-    </canvas>
-  </div>
+  <app-report-chart [chartData]='chartData'></app-report-chart>
