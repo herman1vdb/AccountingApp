@@ -18,6 +18,9 @@ import { ReportComponent } from "./reports/report/report.component";
 import { TransactionListResolver } from "./_resolvers/transaction-list.resolver";
 import { ReportFilterComponent } from "./reports/report-filter/report-filter.component";
 import { ReportChartComponent } from "./reports/report-chart/report-chart.component";
+import { ReportExpincChartComponent } from "./reports/report-expinc-chart/report-expinc-chart.component";
+import { ReportLiabassetsChartComponent } from "./reports/report-liabassets-chart/report-liabassets-chart.component";
+import { ReportCashflowChartComponent } from "./reports/report-cashflow-chart/report-cashflow-chart.component";
 
 export const appRoutes: Routes = [
   { path: "", component: HomeComponent },
@@ -71,9 +74,33 @@ export const appRoutes: Routes = [
           accounts: AccountListResolver
         }
       },
-        {
+      {
         path: "report/chart",
         component: ReportChartComponent,
+        resolve: {
+          transactions: TransactionListResolver,
+          accounts: AccountListResolver
+        }
+      },
+      {
+        path: "report/expincchart",
+        component: ReportExpincChartComponent,
+        resolve: {
+          transactions: TransactionListResolver,
+          accounts: AccountListResolver
+        }
+      },
+      {
+        path: "report/liabassetschart",
+        component: ReportLiabassetsChartComponent,
+        resolve: {
+          transactions: TransactionListResolver,
+          accounts: AccountListResolver
+        }
+      },
+      {
+        path: "report/cashflowchart",
+        component: ReportCashflowChartComponent,
         resolve: {
           transactions: TransactionListResolver,
           accounts: AccountListResolver

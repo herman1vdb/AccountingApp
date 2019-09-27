@@ -1,28 +1,75 @@
-import { Transaction } from '../_models/transaction';
-import { Account } from '../_models/account';
+import { Transaction } from "../_models/transaction";
+import { Account } from "../_models/account";
 
-export function calcTotalTransPerAccount(transactions: Transaction[], account: Account) {
+var totals = { debits: 0, credits: 0 };
 
-    let debits = 0;
-    let credits = 0;
+export function calcTotalTransPerAccount(
+  transactions: Transaction[],
+  account: Account
+) {
+  totals.debits = 0;
+  totals.credits = 0;
 
-    const debitTransactions = transactions.filter(t => t.accountDebitId === account.id);
-    const creditTransactions = transactions.filter(t => t.accountCreditId === account.id);
+  const debitTransactions = transactions.filter(
+    t => t.accountDebitId === account.id
+  );
+  const creditTransactions = transactions.filter(
+    t => t.accountCreditId === account.id
+  );
 
-    if (debitTransactions.length > 0) {
-        debits = debitTransactions.map(a => a.amount).reduce((sum, current) => sum + current);
+  sumTransactions(debitTransactions, "d");
+  sumTransactions(creditTransactions, "c");
+
+  return calculateTotal(account.typeId);
+}
+
+export function calcTotalTransPerType(
+  transactions: Transaction[],
+  typeId: number
+) {
+  totals.debits = 0;
+  totals.credits = 0;
+
+  const debitTransactions = transactions.filter(
+    t => t.accountDebit.typeId === typeId
+  );
+
+  const creditTransactions = transactions.filter(
+    t => t.accountCredit.typeId === typeId
+  );
+
+  sumTransactions(debitTransactions, "d");
+  sumTransactions(creditTransactions, "c");
+
+  return calculateTotal(typeId);
+}
+
+
+
+
+function sumTransactions(transactions, typeTrans) {
+  if (transactions.length > 0) {
+    if (typeTrans === "d") {
+      totals.debits = sum(transactions);
     }
-
-    if (creditTransactions.length > 0) {
-        credits = creditTransactions.map(a => a.amount).reduce((sum, current) => sum + current);
+    if (typeTrans === "c") {
+      totals.credits = sum(transactions);
     }
+  }
+}
 
-    if (account.typeId === 1 || account.typeId === 4) {
-        return (credits - debits);
-    } else
-    if (account.typeId === 2 || account.typeId === 3) {
-        return (debits - credits);
-    } else {
-        return (0);
-    }
+function sum(transactions) {
+  return transactions
+    .map(a => a.amount)
+    .reduce((sum, current) => sum + current);
+}
+
+function calculateTotal(typeId) {
+  if (typeId === 1 || typeId === 4) {
+    return totals.credits - totals.debits;
+  } else if (typeId === 2 || typeId === 3) {
+    return totals.debits - totals.credits;
+  } else {
+    return 0;
+  }
 }
