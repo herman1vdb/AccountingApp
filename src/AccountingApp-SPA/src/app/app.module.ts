@@ -44,12 +44,13 @@ import { BudgetSummaryComponent } from "./budget/budget-summary/budget-summary.c
 import { TransactionsDisplayComponent } from "./transactions/transactions-display/transactions-display.component";
 import { ReportComponent } from "./reports/report/report.component";
 import { ReportFilterComponent } from "./reports/report-filter/report-filter.component";
-import { ReportDisplayTransactionsComponent } from "./reports/report/report-display-transactions/report-display-transactions.component";
+import { ReportDisplayTransactionsComponent } from "./reports/report-filter/report-display-transactions/report-display-transactions.component";
 import { ReportChartComponent } from "./reports/report-chart/report-chart.component";
 import { ChartsModule } from "ng2-charts";
-import { ReportExpincChartComponent } from "./reports/report-expinc-chart/report-expinc-chart.component";
-import { ReportLiabassetsChartComponent } from "./reports/report-liabassets-chart/report-liabassets-chart.component";
-import { ReportCashflowChartComponent } from "./reports/report-cashflow-chart/report-cashflow-chart.component";
+import { ReportExpincChartComponent } from "./reports/report-chart/report-expinc-chart/report-expinc-chart.component";
+import { ReportLiabassetsChartComponent } from "./reports/report-chart/report-liabassets-chart/report-liabassets-chart.component";
+import { ReportCashflowChartComponent } from "./reports/report-chart/report-cashflow-chart/report-cashflow-chart.component";
+import { ReportAccountChartComponent } from "./reports/report-chart/report-account-chart/report-account-chart.component";
 
 export function tokenGetter() {
   return localStorage.getItem("token");
@@ -81,7 +82,8 @@ export function tokenGetter() {
     ReportChartComponent,
     ReportExpincChartComponent,
     ReportLiabassetsChartComponent,
-    ReportCashflowChartComponent
+    ReportCashflowChartComponent,
+    ReportAccountChartComponent
   ],
   imports: [
     ChartsModule,

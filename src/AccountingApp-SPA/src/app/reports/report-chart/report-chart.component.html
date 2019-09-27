@@ -1,9 +1,4 @@
-  <select (change)="changeAccount($event)" id="account" class="form-control" ngModel name="account">
-    <option *ngFor="let account of accounts" value="{{account.id}}" [ngValue]="accounts">
-      {{account.description}}</option>
-  </select>
-  
-  <div *ngIf="selectedAccount" style="display: block">    
+  <div style="display: block">
     <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
       [legend]="barChartLegend" [chartType]="barChartType">
     </canvas>

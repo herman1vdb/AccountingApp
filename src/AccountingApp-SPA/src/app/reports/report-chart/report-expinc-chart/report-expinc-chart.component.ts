@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import {
   calcTotalTransPerAccount,
   calcTotalTransPerType
-} from "../../_helpers/calcTotalTrans";
+} from "../../../_helpers/calcTotalTrans";
 import { ActivatedRoute } from "@angular/router";
 import { Transaction } from "src/app/_models/transaction";
 import { Account } from "src/app/_models/account";
