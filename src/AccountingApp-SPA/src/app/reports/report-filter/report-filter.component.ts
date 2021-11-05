@@ -11,6 +11,10 @@ import { DecimalPipe } from "@angular/common";
   styleUrls: ["./report-filter.component.css"]
 })
 export class ReportFilterComponent implements OnInit {
+  @Input() fromD: Date;
+  @Input() toD: Date;
+  @Input() accId: Date;
+
   transactions: Transaction[];
   filteredTransactions: Transaction[];
   accounts: Account[];
@@ -27,6 +31,19 @@ export class ReportFilterComponent implements OnInit {
       this.transactions = data["transactions"];
       this.accounts = data["accounts"];
     });
+    
+    if (this.fromD && this.toD) {
+      let event = {
+        target: [
+          { id: "fromDate", value: this.fromD },
+          { id: "toDate", value: this.toD }
+        ]
+      };
+      this.filterByDate(event);
+    }
+    if (this.accId) {
+      alert("Hi");
+    }
   }
 
   filterByDate(event) {
@@ -58,7 +75,7 @@ export class ReportFilterComponent implements OnInit {
     this.sumValues();
   }
   filterByKeyword(event) {
-    this.keyword = event.target.value;    
+    this.keyword = event.target.value;
     this.filteredTransactions = this.transactions.filter(t =>
       t.description.toLowerCase().includes(this.keyword.toLowerCase())
     );
