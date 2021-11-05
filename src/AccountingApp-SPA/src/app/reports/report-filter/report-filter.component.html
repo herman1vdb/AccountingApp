@@ -1,0 +1,23 @@
+<!-- From Date <input type="date"> -->
+<div>
+  <select (change)="filterByAccount($event)">
+    <option value="">Please select</option>
+    <option id="account.id" *ngFor="let account of accounts">{{account.description}}</option>
+  </select>
+</div>
+<div>
+  <label for="">From</label><input (change)=filterByDate($event) id="fromDate" type="date">
+  <label for="">To</label><input (change)=filterByDate($event) id="toDate" type="date">
+</div>
+
+<div>
+  <label>Search Description</label> <input (input)="filterByKeyword($event)" id="keyword" type="text">
+</div>
+<div *ngIf="filteredTransactions">
+  <app-report-display-transactions [transactions]="filteredTransactions"></app-report-display-transactions>
+
+  <div class="container">
+    <div>TOTAL</div>
+    <div>{{total | currency: 'EUR':true}}</div>
+  </div>
+</div>

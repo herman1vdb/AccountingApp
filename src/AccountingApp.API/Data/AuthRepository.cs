@@ -19,10 +19,10 @@ namespace AccountingApp.API.Data
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
 
-            if(user == null)
+            if (user == null)
                 return null;
 
-            if(!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))            
+            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
                 return null;
 
             return user;
@@ -31,12 +31,12 @@ namespace AccountingApp.API.Data
 
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
-            using(var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
-            {                
+            using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
+            {
                 var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
                 for (int i = 0; i < computedHash.Length; i++)
                 {
-                    if(computedHash[i] != passwordHash[i]) return false;
+                    if (computedHash[i] != passwordHash[i]) return false;
                 }
                 return true;
             }
@@ -44,17 +44,17 @@ namespace AccountingApp.API.Data
 
         public async Task<User> Register(UserForRegisterDto userForRegisterDto)
         {
-            
+
             byte[] passwordHash, passwordSalt;
             CreatePasswordHash(userForRegisterDto.Password, out passwordHash, out passwordSalt);
-            
+
             User user = new User
             {
                 Username = userForRegisterDto.Username,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt
             };
-            
+
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
 
@@ -63,7 +63,7 @@ namespace AccountingApp.API.Data
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
-            using(var hmac = new System.Security.Cryptography.HMACSHA512())
+            using (var hmac = new System.Security.Cryptography.HMACSHA512())
             {
                 passwordSalt = hmac.Key;
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
@@ -73,6 +73,28 @@ namespace AccountingApp.API.Data
         public async Task<bool> UserExist(string username)
         {
             return await _context.Users.AnyAsync(x => x.Username == username);
+        }
+
+        public async Task<User> UpdatePassword(UserForUpdateDto userForUpdateDto)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == userForUpdateDto.Username);
+
+            if (user == null)
+                return null;
+
+            if (!VerifyPasswordHash(userForUpdateDto.OldPassword, user.PasswordHash, user.PasswordSalt))
+                return null;
+
+            byte[] passwordHash, passwordSalt;
+            CreatePasswordHash(userForUpdateDto.NewPassword, out passwordHash, out passwordSalt);
+
+
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
+
+            await _context.SaveChangesAsync();
+
+            return user;
         }
     }
 }

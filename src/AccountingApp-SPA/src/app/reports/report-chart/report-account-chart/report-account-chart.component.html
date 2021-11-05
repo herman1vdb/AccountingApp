@@ -1,0 +1,8 @@
+  <label>Select account</label>
+  <select (change)="changeAccount($event)" id="account" class="" ngModel name="account">
+    <option *ngFor="let account of accounts" value="{{account.id}}" [ngValue]="accounts">
+      {{account.description}}</option>
+  </select>
+
+ <app-report-chart *ngIf="selectedAccount" [chartData]='chartData'></app-report-chart>
+  

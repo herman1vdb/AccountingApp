@@ -1,0 +1,71 @@
+[
+    {
+        "Description": "Rabobank Betaalrekening",
+        "TypeId": 3,
+        "UserId": 1,
+        "isActive": 1,
+        "isControlAccount": 1
+
+    },
+    {
+        "Description": "Salary",
+        "TypeId": 1,
+        "UserId": 1,
+        "Budget": 4500,
+        "isActive" : 1
+    },
+    {
+        "Description": "Rent",
+        "TypeId": 2,
+        "UserId": 1,
+        "Budget": 1000,
+        "isActive" : 1
+    },
+    {
+        "Description": "Homeloan",
+        "UserId": 1,
+        "TypeId": 4,
+        "isActive" : 1     
+    },
+    {
+        "Description": "Vehicle",
+        "UserId": 1,
+        "TypeId": 3,
+        "isActive" : 1     
+    },
+    {
+        "Description": "Groceries",
+        "UserId": 1,
+        "TypeId": 2,
+        "Budget": 1000,
+        "isActive" : 1
+    },
+    {
+        "Description": "Medical Aid",
+        "UserId": 1,
+        "TypeId": 2,
+        "Budget": 500,
+        "isActive" : 1
+    },
+    {
+        "Description": "Insurance",
+        "UserId": 1,
+        "TypeId": 2,
+        "Budget": 300,
+        "isActive" : 1
+    },
+    {
+        "Description": "Levies",
+        "TypeId": 2,
+        "UserId": 1,
+        "Budget": 200,
+        "isActive" : 1
+    },
+    {
+        "Description": "Rates and Taxes",
+        "TypeId": 2,
+        "UserId": 1,
+        "Budget": 0,
+        "isActive" : 1
+    }
+  ]

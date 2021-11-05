@@ -1,0 +1,17 @@
+<p>Total in control accounts</p>
+
+<div *ngFor="let account of budgetSummary">
+  <div>{{account.budget.account.description}}</div>
+  <div>{{account.totalTransactions | currency}}</div>
+</div>
+
+__________________________________
+<!-- <p>
+  To pay on annual basis
+</p>
+<div>Medical Aid</div>
+<div>Liability Versekering</div>
+<div>Honde belasting</div>
+<div>Riool en afval belasting</div>
+<div>Waterschapsbelasten</div>
+<div>Lewensversekering</div> -->

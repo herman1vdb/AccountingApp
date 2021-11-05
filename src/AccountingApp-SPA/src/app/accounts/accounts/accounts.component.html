@@ -1,0 +1,90 @@
+<div class="container">
+
+  <button class="btn btn-default" [routerLink]="['/accounts/create']" routerLinkActive="router-link-active">
+    Create
+  </button>
+  <br> 
+  <div class="accHeading">Income</div>
+  <br> 
+  <div *ngFor="let account of incomeAcc">
+    <div class="row">
+      <div class="col-lg-2 col-md-3 col-sm-6">
+        {{account.description}}
+      </div>
+      <div class="col-lg-2 col-md-3 col-sm-6">
+        {{account.budget}}
+      </div>
+      <div class="col-lg-2 col-md-3 col-sm-6">
+        {{account.isActive}}
+      </div>
+      <div class="col-lg-2 col-md-3 col-sm-6">
+        <button class="btn btn-primary" [routerLink]="['/accounts/edit/', account.id]" routerLinkActive="router-link-active">
+          Edit
+        </button>
+      </div>
+    </div>
+  </div>
+  <br> 
+  <div class="accHeading">Expenses</div>
+  <br> 
+  <div *ngFor="let account of expenseAcc">
+      <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-6">
+          {{account.description}}
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-6">
+          {{account.budget}}
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-6">
+          {{account.isActive}}
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-6">
+          <button class="btn btn-primary" [routerLink]="['/accounts/edit/', account.id]" routerLinkActive="router-link-active">
+            Edit
+          </button>
+        </div>
+      </div>
+    </div>
+    <br> 
+  <div class="accHeading">Assets</div>
+  <br> 
+    <div *ngFor="let account of assetAcc">
+        <div class="row">
+          <div class="col-lg-2 col-md-3 col-sm-6">
+            {{account.description}}
+          </div>
+          <div class="col-lg-2 col-md-3 col-sm-6">
+            {{account.budget}}
+          </div>
+          <div class="col-lg-2 col-md-3 col-sm-6">
+            {{account.isActive}}
+          </div>
+          <div class="col-lg-2 col-md-3 col-sm-6">
+            <button class="btn btn-primary" [routerLink]="['/accounts/edit/', account.id]" routerLinkActive="router-link-active">
+              Edit
+            </button>
+          </div>
+        </div>
+      </div>
+      <br> 
+  <div class="accHeading">Liabilities</div>
+  <br> 
+      <div *ngFor="let account of liabilityAcc">
+          <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-6">
+              {{account.description}}
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-6">
+              {{account.budget}}
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-6">
+              {{account.isActive}}
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-6">
+              <button class="btn btn-primary" [routerLink]="['/accounts/edit/', account.id]" routerLinkActive="router-link-active">
+                Edit
+              </button>
+            </div>
+          </div>
+        </div>
+</div>

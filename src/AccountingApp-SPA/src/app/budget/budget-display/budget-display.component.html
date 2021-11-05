@@ -1,0 +1,42 @@
+  <div class="row">
+      <div class="col-md-4">From Date <input type="date" [ngModel] ="fromDate" (ngModelChange)="changeFromDate($event)"></div> 
+      <div class="col-md-4">To Date <input type="date" [ngModel] ="toDate" (ngModelChange)="changeToDate($event)"></div>
+    </div>       
+    <button (click)="previousMonth()" class="btn btn-primary">Previous Month</button><button (click)="nextMonth()" class="btn btn-default">Next Month</button>                
+  
+<div *ngFor="let budgetForDisplay of budgetForDisplay">   
+  <div class="budHeading">{{budgetForDisplay.typeDescription}}</div>
+  <hr>
+  <div class="row">
+    <div class="col-sm-3"><strong>Account</strong></div>
+    <div class="col-sm-2 text-right"><strong>Budget</strong></div>
+    <div class="col-sm-2 text-right"><strong>Transactions</strong></div>
+    <div class="col-sm-2 text-right"><strong>Difference</strong></div>
+    <div class="col-sm-2 text-right"><strong>Notes</strong></div>      
+  </div>  
+  <hr>
+  <div *ngFor="let budget of budgetForDisplay.budgetList">    
+      <div class="row"  [style.color]="getColor(budget)">
+          <div class="col-sm-3"><a href="">{{budget.account.description}}</a></div>
+          <div class="col-sm-2 text-right">{{budget.account.budget  | currency : "€"}}</div>
+          <div class="col-sm-2 text-right"><strong>{{budget.totalTransactionsPerAcc | currency : "€"}}</strong></div>
+          <div class="col-sm-2 text-right"><strong>{{budget.totalDifferencePerAcc | currency : "€"}}</strong></div>
+          <div class="col-sm-2 text-right"><strong>{{note}}</strong></div>      
+        </div>  
+  </div>  
+  <div class="row">    
+      <div class="col-sm-3"><strong>Total {{budgetForDisplay.typeDescription}}</strong></div>
+      <div class="col-sm-2 text-right"><strong>{{budgetForDisplay.totalBudget | currency : "€"}}</strong></div>      
+      <div class="col-sm-2 text-right"><strong>{{budgetForDisplay.totalTransactions | currency : "€"}}</strong></div>      
+      <div class="col-sm-2 text-right"><strong>{{budgetForDisplay.totalDifference | currency : "€"}}</strong></div>            
+      
+  </div>  
+</div>
+<div class= "budHeading"></div>
+<div class="row">    
+    <div class="col-sm-3"><strong>Grand Total</strong></div>
+    <div class="col-sm-2 text-right"><strong>{{grandTotal | currency : "€"}}</strong></div>
+    <div class="col-sm-2 text-right"><strong>{{grandTotalTrans | currency : "€"}}</strong></div>
+    <div class="col-sm-2 text-right"><strong>{{grandTotalDiff | currency : "€"}}</strong></div>
+</div>  
+

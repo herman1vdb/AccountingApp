@@ -3,6 +3,7 @@ using System;
 using AccountingApp.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AccountingApp.API.Migrations
@@ -14,12 +15,86 @@ namespace AccountingApp.API.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024");
+                .HasAnnotation("ProductVersion", "2.1.14-servicing-32113")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("AccountingApp.API.Models.Account", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Budget");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("TypeId");
+
+                    b.Property<int>("UserId");
+
+                    b.Property<bool>("isActive");
+
+                    b.Property<bool>("isControlAccount");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TypeId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Accounts");
+                });
+
+            modelBuilder.Entity("AccountingApp.API.Models.Transaction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AccountCreditId");
+
+                    b.Property<int>("AccountDebitId");
+
+                    b.Property<decimal>("Amount");
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<string>("Description");
+
+                    b.Property<bool>("Posted");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountCreditId");
+
+                    b.HasIndex("AccountDebitId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Transactions");
+                });
+
+            modelBuilder.Entity("AccountingApp.API.Models.Type", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Types");
+                });
 
             modelBuilder.Entity("AccountingApp.API.Models.User", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<byte[]>("PasswordHash");
 
@@ -32,16 +107,35 @@ namespace AccountingApp.API.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("AccountingApp.API.Models.Value", b =>
+            modelBuilder.Entity("AccountingApp.API.Models.Account", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.HasOne("AccountingApp.API.Models.Type", "Type")
+                        .WithMany("Accounts")
+                        .HasForeignKey("TypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.Property<string>("name");
+                    b.HasOne("AccountingApp.API.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
 
-                    b.HasKey("Id");
+            modelBuilder.Entity("AccountingApp.API.Models.Transaction", b =>
+                {
+                    b.HasOne("AccountingApp.API.Models.Account", "AccountCredit")
+                        .WithMany()
+                        .HasForeignKey("AccountCreditId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.ToTable("Values");
+                    b.HasOne("AccountingApp.API.Models.Account", "AccountDebit")
+                        .WithMany()
+                        .HasForeignKey("AccountDebitId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("AccountingApp.API.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
